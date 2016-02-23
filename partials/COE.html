@@ -6,22 +6,37 @@
             <span></span>
         </a>
 
-        <div id="menu">
+        <div class="pure-u-md-1-6" id="menu">
             <div class="pure-menu">
-                <a class="pure-menu-heading" href="#">COE</a>
+                <a class="pure-menu-heading" href="">COE</a>
 
                 <ul class="pure-menu-list">
                    
-                    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Documents</a></li>
-                    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Lists</a>
+                    <li class="pure-menu-item" ng-click="ShowCOEList()"><a href="" class="pure-menu-link">Practise</a>
+                        <ul ng-show = "IsCOEVisible" class="practise-list">
+                            <li><a href="#">UX</a></li>
+                            <li><a href="#">Mobile</a></li>
+                            <li><a href="#">Project Management</a></li>
+                            <li><a href="#">ASP.NET</a></li>
+                            <li><a href="#">Business Analysis</a></li>
+                            <li><a href="#">Drupal</a></li>
+                            <li><a href="#">UI</a></li>
+                            <li><a href="#">Autonomy</a></li>
+                            <li><a href="#">Java</a></li>
+                            <li><a href="#">Sitecore</a></li>
+                            <li><a href="#">DayCQ5</a></li>
+                             <li><a href="#">MarketingAutomation</a></li>
+                        </ul>
                     </li>
-                    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Discussions</a></li> 
-                    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Sites</a></li>
+                    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Documents</a>
+                    </li>
+                    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Team Discussions</a></li> 
+                    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Blogs</a></li>
                 </ul>
             </div>
         </div>
 
-        <div id="main">
+        <div class="pure-u-md-3" id="main">
             <div class="header">
                 <h1>COE</h1>
                 <h2>A subtitle for your page goes here</h2>
