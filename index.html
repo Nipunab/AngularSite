@@ -19,22 +19,10 @@
     <!-- End JS Vendor Files-->
 </head>
 <body ng-app="siteApp">
-
-<div>
-   <div class="header">
-        <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
-            <a class="pure-menu-heading" href="#home">Tech360</a>
-
-            <ul class="pure-menu-list">
-                <li class="pure-menu-item"><a href="#projects" class="pure-menu-link">Projects</a></li>
-                <li class="pure-menu-item"><a href="#coe" class="pure-menu-link">COE</a></li>
-                <li class="pure-menu-item"><a href="#trainings" class="pure-menu-link">Trainings</a></li> 
-            </ul>
-        </div>
-</div>
-</div>
- <div ng-view>   </div>
- 
+	<div>
+		<div ng-include="'partials/header.html'"></div>
+	</div>
+	 <div ng-view>   </div>
 
 <!-- Start Controllers-->
 <!-- <script src="js/controllers/home.controller.js"></script>
