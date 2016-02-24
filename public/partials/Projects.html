@@ -12,16 +12,17 @@
                 <ul class="pure-menu-list">
                     <li class="pure-menu-item" ng-click="ShowProjectList()"><a href="" class="pure-menu-link">Projects List</a>
                          <ul ng-show = "IsProjectVisible" class="projects-list">
-                            <li><a href="#/projects/humana">Humana</a></li>
-                            <li><a href="#">Anritsu</a></li>
-                            <li><a href="#">Celanese</a></li>
-                            <li><a href="#">Polycom</a></li>
-                            <li><a href="#">Hertz</a></li>
-                            <li><a href="#">SonoSite</a></li>
-                            <li><a href="#">Apollo</a></li>
-                            <li><a href="#">SPLC</a></li>
-                            <li><a href="#">Trupanion</a></li>
-                            <li><a href="#">Telcel</a></li> 
+                            <!--<li><a href="#/projects/humana">Humana</a></li>-->
+                            <!--<li><a href="#">Anritsu</a></li>-->
+                            <!--<li><a href="#">Celanese</a></li>-->
+                            <!--<li><a href="#">Polycom</a></li>-->
+                            <!--<li><a href="#">Hertz</a></li>-->
+                            <!--<li><a href="#">SonoSite</a></li>-->
+                            <!--<li><a href="#">Apollo</a></li>-->
+                            <!--<li><a href="#">SPLC</a></li>-->
+                            <!--<li><a href="#">Trupanion</a></li>-->
+                            <!--<li><a href="#">Telcel</a></li> -->
+                             <li ng-repeat="projectItem in Projects">{{projectItem.Name}}</li>
                         </ul>
                     </li> 
                     <li class="pure-menu-item"><a href="#" class="pure-menu-link">Documents</a>

@@ -107,23 +107,35 @@ DB.getTable = function (tName) {
 };
 
 DB.addTableRow = function (tName, tRowObj) {
+    var exeStatus = false;
     var tableData = DB.cache.get(tName);
     if(tableData){
         tableData.list.push(tRowObj);
+        exeStatus = true;
+    }else{
+        exeStatus = false;
     }
+    return exeStatus;
 };
 
 DB.updateTableRow = function (tName, tRowObj) {
+    var exeStatus = false;
     var tableData = DB.cache.get(tName);
     if(tableData){
+        var isRowExists = false;
         for(var i =0; i< tableData.list.length; i++){
             var lItem = tableData.list[i];
             if(lItem.Id && lItem.Id === tRowObj.Id){
                 tableData.list[i] = tRowObj;
+                isRowExists = true;
                 break;
             }
         }
+        exeStatus = isRowExists ? true : false;
+    }else{
+        exeStatus = false;
     }
+    return exeStatus;
 };
 
 var removeEmptyList = function (lst) {
@@ -133,31 +145,52 @@ var removeEmptyList = function (lst) {
 };
 
 DB.deleteTableRow = function (tName, tRowObj) {
+    var exeStatus = false;
     var tableData = DB.cache.get(tName);
     if(tableData){
+        var isRowExists = false;
         var dIndex = null;
         for(var i =0; i< tableData.list.length; i++){
             var lItem = tableData.list[i];
-            if(lItem.Id && lItem.Id === tRowObj.Id){
+            if(lItem.Id && lItem.Id == tRowObj.Id){
                 dIndex = i;
+                isRowExists = true;
                 break;
             }
         }
-        if(dIndex){
+        if(dIndex >= 0){
             delete tableData.list[dIndex];
             tableData.list = removeEmptyList(tableData.list);
         }
+
+        if(isRowExists){
+            exeStatus = true;
+        }else{
+            exeStatus = false;
+        }
+
+    }else{
+        exeStatus = false;
     }
+
+    return exeStatus;
 };
 
 DB.writeTable = function (tName, tData) {
     return new Promise(function (resolve, reject) {
-        fs.writeFile(DB.rootPath + '/data/' + tName.toLowerCase() + '.json', JSON.stringify(tData) , function (err, data) {
-            if(err){
+        if(!tData){
+            tData = DB.cache.get(tName);
+        }
+        if(tData) {
+            fs.writeFile(DB.rootPath + '/data/' + tName.toLowerCase() + '.json', JSON.stringify(tData), function (err, data) {
+                if (err) {
 
-            }
+                }
+                resolve({});
+            });
+        }else{
             resolve({});
-        });
+        }
     });
 };
 
