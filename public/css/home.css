@@ -280,3 +280,20 @@ a.pure-button-primary {
         font-size: 300%;
     }
 }
+
+
+ .discussion-sidebar{
+  bottom: 0;
+    left: 0;
+    position: fixed;
+    top: 106px;
+    background: rgb(61, 79, 93);
+    padding:30px;
+    }
+    .discussion-sidebar p{
+        color:#C0C0C0;
+    }
+.discussion-content{
+      margin-left: 25%;
+    padding: 2em 3em 0;
+}
