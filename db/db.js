@@ -1,6 +1,7 @@
 var http = require('http');
 var formidable = require('formidable');
 var _ = require('lodash');
+var url = require('url');
 
 var Utl = require('./lib/util.js');
 var Models = require('./lib/models');
@@ -231,7 +232,8 @@ var server = http.createServer(function(req, res) {
     }
     var isRouteFound = false, fnToCall = null;
     _.forEach(routings, function (lItem) {
-        if(lItem.Url === req.url){
+        var reqUrl = url.parse(req.url);
+        if(lItem.Url === reqUrl.pathname){
             isRouteFound = true;
             fnToCall = lItem.Fn;
         }

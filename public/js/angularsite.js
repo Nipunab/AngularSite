@@ -23,6 +23,18 @@ siteApp.controller('ProjetListController', function ($scope, $routeParams) {
     console.log("selected project is ", $routeParams.projectname);
 });
 
+var makeRequest = function (url, method, data) {
+    angular.element('body').injector().get('$http')({
+        method: method,
+        url: url,
+        data: data
+    }).then(function (dt) {
+        console.log(dt);
+    }).catch(function () {
+        console.log('ERR');
+    });
+};
+
 var getProjects = function ($http, $scope) {
     $http({method: "GET", url: "http://localhost:5654/table/projects"}).then(function (projectResponse) {
         $scope.Projects = projectResponse.data.Body.list;
@@ -43,11 +55,25 @@ var addProject = function (data) {
     });
 };
 
+//e.g:-  addEmployee({ "FName": "Nipuna"});
+//checkout db/lib/models.js for Properties mentioned for Employee table
 var addEmployee = function (data) {
     angular.element('body').injector().get('$http')({
         method: "POST",
         url: "http://localhost:5654/table/employee",
         data: {"FName": data["FName"], "LName": data["LName"] }
+    }).then(function (dt) {
+        console.log(dt);
+    }).catch(function () {
+        console.log('ERR');
+    });
+};
+
+//e.g:- deleteProject({ "Id": "d32erewrwerewrerwer"})
+var deleteProject = function (data) {
+    angular.element('body').injector().get('$http')({
+        method: "DELETE",
+        url: "http://localhost:5654/table/projects?Id=" + data["Id"]
     }).then(function (dt) {
         console.log(dt);
     }).catch(function () {
