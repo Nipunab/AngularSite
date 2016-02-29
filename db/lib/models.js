@@ -11,13 +11,13 @@ $M.Project = function (obj) {
     this.Manager = obj["Manager"];
 };
 
-$M.Employee = function (obj) {
+$M.Practise = function (obj) {
     this.Id = obj["Id"] || Utl.guid();
-    this.FName = obj["FName"];
-    this.LName = obj["LName"];
+     this.PName = obj["PName"];
+    // this.LName = obj["LName"];
 
-    this.JoinedDate = obj["JoinedDate"];
-    this.ExpWhenJoined = obj["ExpWhenJoined"];
+    // this.JoinedDate = obj["JoinedDate"];
+    // this.ExpWhenJoined = obj["ExpWhenJoined"];
 };
 
 module.exports = $M;

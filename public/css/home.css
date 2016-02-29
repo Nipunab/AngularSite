@@ -282,18 +282,29 @@ a.pure-button-primary {
 }
 
 
+.discussion-container{
+    position:relative;
+}
  .discussion-sidebar{
-  bottom: 0;
-    left: 0;
-    position: fixed;
-    top: 106px;
-    background: rgb(61, 79, 93);
-    padding:30px;
+   left: 22%;
+    padding: 30px;
+    position: absolute;
+    top: 80px;
+    width: 30%;
+    background: rgb(61, 79, 93); 
     }
     .discussion-sidebar p{
         color:#C0C0C0;
+        padding:10px;
     }
 .discussion-content{
-      margin-left: 25%;
-    padding: 2em 3em 0;
+      left: 60%;
+     top: 60px; 
+    position: absolute;
 }
+ 
+ .document-container{
+    left: 25%;
+    margin-top: 150px;
+    position: relative;
+ }

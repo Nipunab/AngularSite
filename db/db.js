@@ -8,7 +8,7 @@ var Models = require('./lib/models');
 
 var routings = [];
 var DbManager = {};
-DbManager.Tables = ['projects', 'employee'];
+DbManager.Tables = ['projects', 'practise'];
 
 Utl.DB.Tables = DbManager.Tables;
 
@@ -22,8 +22,8 @@ var parseTableRow = function (tName, reqData) {
         case 'PROJECTS':
             obj = new Models.Project(reqData);
             break;
-        case 'EMPLOYEE':
-            obj = new Models.Employee(reqData);
+        case 'PRACTISE':
+            obj = new Models.Practise(reqData);
             break;
         default:
     }

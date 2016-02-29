@@ -6,8 +6,10 @@
 50% { left: -200%; }
 70% { left: -200%; }
 75% { left: -300%; }
-95% { left: -300%; }
-100% { left: -400%; }
+90% { left: -300%; }
+95% { left: -400%; }
+100% { left: -500%; }
+0% { left: 0%; }
 }
 
 body { margin: 0; } 
@@ -20,5 +22,5 @@ div#slider figure {
   left: 0;
   text-align: left;
   font-size: 0;
-  animation: 30s slidy infinite; 
+  animation: 10s slidy infinite; 
 }

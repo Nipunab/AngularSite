@@ -13,7 +13,7 @@
                     <li class="pure-menu-item" ng-click="ShowPractiseList()">
                         <a href="" class="pure-menu-link">Practise</a>
                     <ul ng-show = "TrainingsVisible" class="trainings-list">
-                            <li><a href="#">UX</a></li>
+                            <!--  <li><a href="#">UX</a></li>
                             <li><a href="#">Mobile</a></li>
                             <li><a href="#">Project Management</a></li>
                             <li><a href="#">ASP.NET</a></li>
@@ -24,12 +24,13 @@
                             <li><a href="#">Java</a></li>
                             <li><a href="#">Sitecore</a></li>
                             <li><a href="#">DayCQ5</a></li>
-                            <li><a href="#">MarketingAutomation</a></li>
+                            <li><a href="#">MarketingAutomation</a></li>  -->
+                            <li ng-repeat="practiseItem in Practise">{{practiseItem.FName}}</li>
                         </ul>
                     </li>
-                    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Documents</a></li>
-                    <li class="pure-menu-item"><a href="#discussions" class="pure-menu-link">Team Discussions</a>               </li>
-                    <li class="pure-menu-item"><a href="#blogs" class="pure-menu-link">Blogs</a></li> 
+                    <li class="pure-menu-item"><a href="#/trainings/documents" class="pure-menu-link">Documents</a></li>
+                    <li class="pure-menu-item" ><a href="#/trainings/discussions" class="pure-menu-link">Team Discussions</a></li>
+                    <li class="pure-menu-item" ><a href="#/trainings/blogs" class="pure-menu-link">Blogs</a></li> 
                 </ul>
             </div>
         </div>

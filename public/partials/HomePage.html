@@ -8,6 +8,7 @@
 					<a href=""><img src="images/news.jpg" alt=""></a>
 					<a href=""><img src="images/events.jpg" alt=""></a>
 					<a href=""><img src="images/birthdays.png" alt=""> </a>
+					<!-- <a href=""><img src="images/new-employees.jpg" alt=""> </a> -->
 				</figure>  
 				<p>Recent Activities</p>
 			</div>
@@ -82,6 +83,9 @@
 			<div class="pure-g">
 				<div class="l-box-lrg pure-u-1 pure-u-md-2-5">
 					Yammer feeds
+
+   				 <div id="embedded-feed" style="height:280px;width:400px;"></div> 
+   
 				</div>
 
 				<div class="l-box-lrg pure-u-1 pure-u-md-3-5">
@@ -100,3 +104,10 @@
 		</div>
 	</div> 
 </div>
+
+ <script>
+        yam.connect.embedFeed(
+          { container: '#embedded-feed',
+            network: 'techaspect.com'  // network permalink (see below)
+        });
+    </script>

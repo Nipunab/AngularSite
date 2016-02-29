@@ -22,14 +22,13 @@
                             <!--<li><a href="#">SPLC</a></li>-->
                             <!--<li><a href="#">Trupanion</a></li>-->
                             <!--<li><a href="#">Telcel</a></li> -->
-                             <li ng-repeat="projectItem in Projects">{{projectItem.Name}}</li>
+                            <a href=""> <li ng-repeat="projectItem in Projects">{{projectItem.Name}}</li></a>
                         </ul>
                     </li> 
-                    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Documents</a>
+                    <li class="pure-menu-item"><a href="#/projects/documents" class="pure-menu-link">Documents</a>
                     </li>
-                    <li class="pure-menu-item"><a href="#discussions" class="pure-menu-link">Discussions</a></li>
+                   <li class="pure-menu-item" ><a href="#/projects/discussions" class="pure-menu-link">Discussions</a></li>
                     <li class="pure-menu-item" ><a href="#/projects/blogs" class="pure-menu-link">Blogs</a>
-                        <!-- <div ng-include="'Blog.html'"></div> -->
                     </li>
                 </ul>
             </div>

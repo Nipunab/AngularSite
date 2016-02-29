@@ -3,11 +3,21 @@ siteApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
         .when('/home', {templateUrl: 'partials/HomePage.html', controller: 'HomePageController'})
         .when('/projects', {templateUrl: 'partials/Projects.html', controller: 'ProjectsController'})
-        // .when('/blogs', {templateUrl: 'partials/Blog.html', controller: 'BlogsController'})
-        .when('/discussions', {templateUrl: 'partials/Discussions.html', controller: 'DiscussionsController'})
         .when('/coe', {templateUrl: 'partials/COE.html', controller: 'COEController'})
         .when('/trainings', {templateUrl: 'partials/Trainings.html', controller: 'TrainingsController'})
+       
         .when('/projects/blogs', {templateUrl: 'partials/Blog.html', controller: 'BlogsController'})
+        .when('/projects/discussions', {templateUrl: 'partials/Discussions.html', controller: 'DiscussionsController'})
+        .when('/projects/documents', {templateUrl: 'partials/fileupload.html', controller: 'DocumentsController'})
+
+        .when('/coe/documents', {templateUrl: 'partials/fileupload.html', controller: 'DocumentsController'}) 
+         .when('/coe/blogs', {templateUrl: 'partials/Blog.html', controller: 'BlogsController'})
+        .when('/coe/discussions', {templateUrl: 'partials/Discussions.html', controller: 'DiscussionsController'})
+         
+         .when('/trainings/documents', {templateUrl: 'partials/fileupload.html', controller: 'DocumentsController'})
+         .when('/trainings/blogs', {templateUrl: 'partials/Blog.html', controller: 'BlogsController'})
+        .when('/trainings/discussions', {templateUrl: 'partials/Discussions.html', controller: 'DiscussionsController'})
+        
         .when('/projects/:projectname', {
             templateUrl: 'partials/ProjectDetails.html',
             controller: 'ProjetListController'
@@ -39,29 +49,16 @@ var getProjects = function ($http, $scope) {
     $http({method: "GET", url: "http://localhost:5654/table/projects"}).then(function (projectResponse) {
         $scope.Projects = projectResponse.data.Body.list;
     }, function () {
-        console.log("SErver not responding!!");
+        console.log("Server not responding!!");
     });
 };
 
+//e.g:-  addProject({ "Name": "Nipuna"});
 var addProject = function (data) {
     angular.element('body').injector().get('$http')({
         method: "POST",
         url: "http://localhost:5654/table/projects",
         data: {"Name": data["Name"], "Manager": data["Manager"] }
-    }).then(function (dt) {
-        console.log(dt);
-    }).catch(function () {
-        console.log('ERR');
-    });
-};
-
-//e.g:-  addEmployee({ "FName": "Nipuna"});
-//checkout db/lib/models.js for Properties mentioned for Employee table
-var addEmployee = function (data) {
-    angular.element('body').injector().get('$http')({
-        method: "POST",
-        url: "http://localhost:5654/table/employee",
-        data: {"FName": data["FName"], "LName": data["LName"] }
     }).then(function (dt) {
         console.log(dt);
     }).catch(function () {
@@ -81,11 +78,34 @@ var deleteProject = function (data) {
     });
 };
 
+//e.g:-  addEmployee({ "FName": "Nipuna"});
+//checkout db/lib/models.js for Properties mentioned for Employee table
+var addPractise = function (data) {
+    angular.element('body').injector().get('$http')({
+        method: "POST",
+        url: "http://localhost:5654/table/employee",
+        data: {"PName": data["FName"],"LName": data["LName"]}
+    }).then(function (dt) {
+        console.log(dt);
+    }).catch(function () {
+        console.log('ERR');
+    });
+};
+
+var getPractise = function ($http, $scope) {
+    $http({method: "GET", url: "http://localhost:5654/table/employee"}).then(function (projectResponse) {
+        $scope.Projects = projectResponse.data.Body.list;
+    }, function () {
+        console.log("Server not responding!!");
+    });
+};
+
+
 siteApp.controller('ProjectsController', function ($scope, $http) {
     $scope.Projects = [];
 
     getProjects($http, $scope);
-
+//Logic for show /Hide of ProjectList in Projects tab(Remove later once DB is ready)
     $scope.IsProjectVisible = false;
     $scope.ShowProjectList = function () {
         //If DIV is visible it will be hidden and vice versa.
@@ -101,6 +121,94 @@ siteApp.controller('ProjectsController', function ($scope, $http) {
 siteApp.controller('BlogsController', function ($scope) {
 
 });
+
+ 
+siteApp.directive('fileModel', ['$parse', function ($parse) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            var model = $parse(attrs.fileModel);
+            var modelSetter = model.assign;
+            
+            element.bind('change', function(){
+                scope.$apply(function(){
+                    modelSetter(scope, element[0].files[0]);
+                });
+            });
+        }
+    };
+}]);
+
+siteApp.service('fileUpload', ['$http', function ($http) {
+    this.uploadFileToUrl = function(file, uploadUrl){
+        var fd = new FormData();
+        fd.append('file', file);
+        $http.post(uploadUrl, fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        })
+        .success(function(){
+            console.log('file uploaded successfully');
+        })
+        .error(function(){
+            console.log('file uploaded unsuccessfully');
+        });
+    }
+}]);
+
+siteApp.controller('DocumentsController', ['$scope', 'fileUpload', function($scope, fileUpload){
+    
+    $scope.uploadFile = function(){
+        var file = $scope.myFile;
+        console.log('file is ' );
+        console.dir(file);
+        var uploadUrl = "/fileUpload";
+        fileUpload.uploadFileToUrl(file, uploadUrl);
+    };
+    
+}]);
+
+//FIleuploading using $http service..not working check later
+// siteApp.controller('DocumentsController', function ($scope) {
+//     var formdata = new Formdata();
+//     $scope.getTheFiles=function($files){
+//         angular.forEach($files,function(value,key){
+//             formdata.append(key,value);
+//         });
+//     };
+//       // NOW UPLOAD THE FILES.
+//             $scope.uploadFiles = function () {
+
+//                 var request = {
+//                     method: 'POST',
+//                     url: '/api/fileupload/',
+//                     data: formdata,
+//                     headers: {
+//                         'Content-Type': undefined
+//                     }
+//                 };
+//                  // SEND THE FILES.
+//                 $http(request)
+//                     .success(function (d) {
+//                         alert(d);
+//                     })
+//                     .error(function () {
+//                     });
+//                 }
+//     });
+//     siteApp.directive('ngFiles',['$parse',function($parse){
+//         function docupload(scope,element,attrs){
+//             var onChange=$parse(attrs.ngFiles);
+//             element.on('change',function(event){
+//                 onChange(scope,{$files:event.target.files});
+//             });
+//         };
+//         return{
+//             link:docupload
+//         }
+//     }])//we get the values using $parse service
+ 
+
 siteApp.controller('DiscussionsController', ['$scope', 'Message', function ($scope, Message, $routeParams) {
 
     $scope.user = "Guest";
@@ -134,7 +242,7 @@ siteApp.factory('Message', ['$firebase',
     }
 ]);
 
-
+//Logic for show /Hide of PractiseList in COE tab
 siteApp.controller('COEController', function ($scope) {
     $scope.IsCOEVisible = false;
     $scope.ShowCOEList = function () {
@@ -142,7 +250,11 @@ siteApp.controller('COEController', function ($scope) {
         $scope.IsCOEVisible = $scope.IsCOEVisible ? false : true;
     }
 });
-siteApp.controller('TrainingsController', function ($scope) {
+//Logic for show /Hide of PractiseList in Trainings tab
+siteApp.controller('TrainingsController', function ($scope,$http) {
+     $scope.Practise = [];
+
+    getPractise($http, $scope);
     $scope.TrainingsVisible = false;
     $scope.ShowPractiseList = function () {
         //If DIV is visible it will be hidden and vice versa.
