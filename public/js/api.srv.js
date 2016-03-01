@@ -31,5 +31,8 @@ nbJsonDbApp.service('nb-db-api', function () {
     this.delete = function () {
         return makeRequest(url);
     };
+    this.getEmployee= function(){
+        return makeRequest(url);
+    };
 
 });

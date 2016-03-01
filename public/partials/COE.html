@@ -13,19 +13,10 @@
                 <ul class="pure-menu-list">
                    
                     <li class="pure-menu-item" ng-click="ShowCOEList()"><a href="" class="pure-menu-link">Practise</a>
-                        <ul ng-show = "IsCOEVisible" class="practise-list">
-                            <li><a href="#">UX</a></li>
-                            <li><a href="#">Mobile</a></li>
-                            <li><a href="#">Project Management</a></li>
-                            <li><a href="#">ASP.NET</a></li>
-                            <li><a href="#">Business Analysis</a></li>
-                            <li><a href="#">Drupal</a></li>
-                            <li><a href="#">UI</a></li>
-                            <li><a href="#">Autonomy</a></li>
-                            <li><a href="#">Java</a></li>
-                            <li><a href="#">Sitecore</a></li>
-                            <li><a href="#">DayCQ5</a></li>
-                             <li><a href="#">MarketingAutomation</a></li>
+                        <ul ng-show = "IsCOEVisible" class="tasks-list">
+                           
+                              
+                             <li ng-repeat="practiseItem in Practise"><a href="#">{{practiseItem.PName}}</a></li>
                         </ul>
                     </li>
                     <li class="pure-menu-item"><a href="#/coe/documents" class="pure-menu-link">Documents</a>

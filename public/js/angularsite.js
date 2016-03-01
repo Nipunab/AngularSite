@@ -8,13 +8,27 @@ siteApp.config(['$routeProvider', function ($routeProvider) {
        
         .when('/projects/blogs', {templateUrl: 'partials/Blog.html', controller: 'BlogsController'})
         .when('/projects/discussions', {templateUrl: 'partials/Discussions.html', controller: 'DiscussionsController'})
-        .when('/projects/documents', {templateUrl: 'partials/fileupload.html', controller: 'DocumentsController'})
+        .when('/projects/documents', {templateUrl: 'partials/fileupload.html', controller: 'DocumentsController',resolve: {
+            pagetype: function(){
+                return 'PROJECT';
+        }
+    }
+})
 
-        .when('/coe/documents', {templateUrl: 'partials/fileupload.html', controller: 'DocumentsController'}) 
+        .when('/coe/documents', {templateUrl: 'partials/fileupload.html', controller: 'DocumentsController', resolve: {
+            pagetype: function(){
+                return 'COE';
+        }
+    }
+    }) 
          .when('/coe/blogs', {templateUrl: 'partials/Blog.html', controller: 'BlogsController'})
         .when('/coe/discussions', {templateUrl: 'partials/Discussions.html', controller: 'DiscussionsController'})
          
-         .when('/trainings/documents', {templateUrl: 'partials/fileupload.html', controller: 'DocumentsController'})
+         .when('/trainings/documents', {templateUrl: 'partials/fileupload.html', controller: 'DocumentsController',resolve: {
+            pagetype: function(){
+                return 'TRANING';
+        }
+    }})
          .when('/trainings/blogs', {templateUrl: 'partials/Blog.html', controller: 'BlogsController'})
         .when('/trainings/discussions', {templateUrl: 'partials/Discussions.html', controller: 'DiscussionsController'})
         
@@ -25,8 +39,14 @@ siteApp.config(['$routeProvider', function ($routeProvider) {
 
         .otherwise({redirectTo: '/home'});
 }]);
-siteApp.controller('HomePageController', function ($scope) {
+siteApp.controller('HomePageController', function ($scope,$http) {
     $scope.message = 'This is Homepage screen';
+     $scope.Employee = [];
+
+    getEmployee($http, $scope);
+    // dbservice.getEmployee().then(function(data){
+    //     $scope.Employee=data.list
+    // })
 });
 siteApp.controller('ProjetListController', function ($scope, $routeParams) {
 
@@ -83,8 +103,8 @@ var deleteProject = function (data) {
 var addPractise = function (data) {
     angular.element('body').injector().get('$http')({
         method: "POST",
-        url: "http://localhost:5654/table/employee",
-        data: {"PName": data["FName"],"LName": data["LName"]}
+        url: "http://localhost:5654/table/practise",
+        data: {"PName": data["PName"]}
     }).then(function (dt) {
         console.log(dt);
     }).catch(function () {
@@ -93,13 +113,33 @@ var addPractise = function (data) {
 };
 
 var getPractise = function ($http, $scope) {
-    $http({method: "GET", url: "http://localhost:5654/table/employee"}).then(function (projectResponse) {
-        $scope.Projects = projectResponse.data.Body.list;
+    $http({method: "GET", url: "http://localhost:5654/table/practise"}).then(function (practiseResponse) {
+        $scope.Practise = practiseResponse.data.Body.list;
     }, function () {
         console.log("Server not responding!!");
     });
 };
+//e.g:-  addEmployee({ "FName": "Nipuna"});
+//checkout db/lib/models.js for Properties mentioned for Employee table
+var addEmployee = function (data) {
+    angular.element('body').injector().get('$http')({
+        method: "POST",
+        url: "http://localhost:5654/table/employee",
+        data: {"FName": data["FName"],"LName":data["LName"],"EmpId":data["EmpId"],"JoinedDate":data["JoinedDate"]}
+    }).then(function (dt) {
+        console.log(dt);
+    }).catch(function () {
+        console.log('ERR');
+    });
+};
 
+var getEmployee = function ($http, $scope) {
+    $http({method: "GET", url: "http://localhost:5654/table/employee"}).then(function (employeeResponse) {
+        $scope.Employee = employeeResponse.data.Body.list;
+    }, function () {
+        console.log("Server not responding!!");
+    });
+};
 
 siteApp.controller('ProjectsController', function ($scope, $http) {
     $scope.Projects = [];
@@ -108,6 +148,7 @@ siteApp.controller('ProjectsController', function ($scope, $http) {
 //Logic for show /Hide of ProjectList in Projects tab(Remove later once DB is ready)
     $scope.IsProjectVisible = false;
     $scope.ShowProjectList = function () {
+        // console.log('testing');
         //If DIV is visible it will be hidden and vice versa.
         $scope.IsProjectVisible = $scope.IsProjectVisible ? false : true;
     };
@@ -156,7 +197,7 @@ siteApp.service('fileUpload', ['$http', function ($http) {
     }
 }]);
 
-siteApp.controller('DocumentsController', ['$scope', 'fileUpload', function($scope, fileUpload){
+siteApp.controller('DocumentsController', ['$scope', 'pagetype','fileUpload', function($scope, pagetype,fileUpload){
     
     $scope.uploadFile = function(){
         var file = $scope.myFile;
@@ -165,7 +206,11 @@ siteApp.controller('DocumentsController', ['$scope', 'fileUpload', function($sco
         var uploadUrl = "/fileUpload";
         fileUpload.uploadFileToUrl(file, uploadUrl);
     };
-    
+    console.log('pagetyepe is', pagetype);
+   
+    $scope.isProject = pagetype === "PROJECT" ? true : false;
+    $scope.isCoe = pagetype === "COE" ? true : false;
+    $scope.isTraining = pagetype === "TRAINING" ? true : false;
 }]);
 
 //FIleuploading using $http service..not working check later
@@ -243,7 +288,10 @@ siteApp.factory('Message', ['$firebase',
 ]);
 
 //Logic for show /Hide of PractiseList in COE tab
-siteApp.controller('COEController', function ($scope) {
+siteApp.controller('COEController', function ($scope,$http) {
+     $scope.Practise = [];
+
+    getPractise($http, $scope);
     $scope.IsCOEVisible = false;
     $scope.ShowCOEList = function () {
         //If DIV is visible it will be hidden and vice versa.
@@ -265,7 +313,13 @@ siteApp.controller('TrainingsController', function ($scope,$http) {
 siteApp.directive('sideNav', function () {
     return {
         restrict: 'EA',
-        scope: {},
+        controller:function($scope){
+            console.log($scope.isProject);
+        },
+        scope: {
+            isProject:'=',
+            isPractise:'='
+        },
         replace: true,
         templateUrl: 'partials/sidenav.html'
     };

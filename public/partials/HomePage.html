@@ -90,12 +90,23 @@
 
 				<div class="l-box-lrg pure-u-1 pure-u-md-3-5">
 					<h4>New Employees</h4>
-					<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat.
-					</p>
+					  <ul class="employee-list">
+                            <!-- <li><a href="#">UX</a></li>
+                            <li><a href="#">Mobile</a></li>
+                            <li><a href="#">Project Management</a></li>
+                            <li><a href="#">ASP.NET</a></li>
+                            <li><a href="#">Business Analysis</a></li>
+                            <li><a href="#">Drupal</a></li>
+                            <li><a href="#">UI</a></li>
+                            <li><a href="#">Autonomy</a></li>
+                            <li><a href="#">Java</a></li>
+                            <li><a href="#">Sitecore</a></li>
+                            <li><a href="#">DayCQ5</a></li>
+                            <li><a href="#">MarketingAutomation</a></li>  -->
+                           <li ng-repeat="empDetails in Employee">FirstName:{{empDetails.FName}} <span>LastName: {{empDetails.LName}}</span>
+                           Joining Date: {{empDetails.JoinedDate}}EMPID: {{empDetails.EmpId}}
+                           </li>
+                        </ul>
 				</div>
 			</div>
 		</div>

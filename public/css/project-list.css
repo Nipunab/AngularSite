@@ -1,0 +1,29 @@
+ .project-details {
+ 	width: 80%;
+ 	margin-left:18%;
+ 	margin-top:35px;
+ }
+ .project-list-container h3{
+        margin:0px;
+    }
+   .project-list-container .banner-section{
+        width:100%;height:200px;
+    }
+   .project-list-container .aboutus-section{
+        width:100%;height:200px;
+    }
+   .project-list-container .team-details{
+        width:100%;height:630px;
+    }
+    .tech-details{
+        width:100%;height:400px; 
+    }
+    .info-section{
+        width:100%;height:500px;background-color:#32CD32;
+    }
+    .team-mates{
+        width:200px;height:200px;background-color:#5c9a1b;float:left;margin:50px;border-radius:100px;
+    }
+    .tech-content{
+        width:200px;height:200px;background-color:#98FB98;float:left;margin:50px;
+    }

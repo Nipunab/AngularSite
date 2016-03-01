@@ -14,10 +14,16 @@ $M.Project = function (obj) {
 $M.Practise = function (obj) {
     this.Id = obj["Id"] || Utl.guid();
      this.PName = obj["PName"];
-    // this.LName = obj["LName"];
-
-    // this.JoinedDate = obj["JoinedDate"];
-    // this.ExpWhenJoined = obj["ExpWhenJoined"];
 };
+
+$M.Employee = function (obj) {
+    this.Id = obj["Id"] || Utl.guid();
+     this.FName = obj["FName"];
+     this.LName = obj["LName"];
+     this.EmpId = obj["EmpId"];
+      this.JoinedDate = obj["JoinedDate"];
+      this.ExpWhenJoined = obj["ExpWhenJoined"];
+};
+
 
 module.exports = $M;
