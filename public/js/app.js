@@ -1,0 +1,1 @@
+var siteApp = angular.module('siteApp', ['ngRoute', 'firebase']);

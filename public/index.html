@@ -11,41 +11,53 @@
     <link rel="stylesheet" href="css/side-menu.css">
     <link rel="stylesheet" href="css/blog.css">
     <!-- Start JS Vendor Files-->
-    
+
     <script src="js/vendor/jquery.js"></script>
     <script src="js/vendor/angular.js"></script>
     <script src="js/vendor/angular-route.js"></script>
     <script src="js/vendor/angular-resource.js"></script>
-    
+
     <script type="text/javascript" src="https://c64.assets-yammer.com/assets/platform_embed.js"></script>
     <!-- End JS Vendor Files-->
     <!-- Firebase -->
     <script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
     <!-- AngularFire -->
     <script src="https://cdn.firebase.com/libs/angularfire/0.9.2/angularfire.min.js"></script>
-    
+
 </head>
 <body ng-app="siteApp">
-	 
-		<div ng-include="'partials/header.html'"></div>
-	 
-	 <div ng-view>   </div>
 
-<!-- Start Controllers-->
-<!-- <script src="js/controllers/home.controller.js"></script>
-  -->
-<!-- End Controllers-->
+<div ng-include="'partials/header.html'"></div>
+
+<div ng-view></div>
+
+<script src="js/global.js"></script>
+
+
 
 <!-- Start Services-->
- 
+
 <!-- End Services-->
 
-<!--Start Directives-->
- <!--End directives-->
 
-<script src="js/angularsite.js"></script>  
- 
- </body>
+<!--<script src="js/angularsite.js"></script>  -->
+<script src="js/app.js"></script>
+<script src="js/app.config.js"></script>
+
+<!-- Start Controllers-->
+<script src="js/controllers/home.controller.js"></script>
+<script src="js/controllers/projects.controller.js"></script>
+<script src="js/controllers/coe.controller.js"></script>
+<script src="js/controllers/blogs.controller.js"></script>
+<!-- End Controllers-->
+
+<!--Start Directives-->
+<script src="js/directives/sideNav/sideNav.dir.js"></script>
+<!--End directives-->
+
+
+
+</body>
 </html>
 
 
