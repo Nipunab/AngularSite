@@ -10,28 +10,36 @@ angular.module('siteApp').config(['$routeProvider', function ($routeProvider) {
                 return 'PROJECT';
             }
         }})
-        //.when('/projects/discussions', {templateUrl: 'partials/Discussions.html', controller: 'DiscussionsController'})
-        //.when('/projects/documents', {
-        //    templateUrl: 'partials/fileupload.html', controller: 'DocumentsController', resolve: {
-        //        pagetype: function () {
-        //            return 'PROJECT';
-        //        }
-        //    }
-        //})
-        //
-        //.when('/coe/documents', {
-        //    templateUrl: 'partials/fileupload.html', controller: 'DocumentsController', resolve: {
-        //        pagetype: function () {
-        //            return 'COE';
-        //        }
-        //    }
-        //})
+        .when('/projects/discussions', {templateUrl: 'partials/Discussions.html', controller: 'DiscussionsController', resolve:{
+            pageType: function () {
+                return 'PROJECT';
+            }
+        }})
+        .when('/projects/documents', {
+            templateUrl: 'partials/fileupload.html', controller: 'DocumentsController', resolve: {
+                pageType: function () {
+                    return 'PROJECT';
+                }
+            }
+        })
+
+        .when('/coe/documents', {
+            templateUrl: 'partials/fileupload.html', controller: 'DocumentsController', resolve: {
+                pageType: function () {
+                    return 'COE';
+                }
+            }
+        })
         .when('/coe/blogs', {templateUrl: 'partials/Blog.html', controller: 'BlogsController', resolve:{
             pageType: function () {
                 return 'COE';
             }
         }})
-        //.when('/coe/discussions', {templateUrl: 'partials/Discussions.html', controller: 'DiscussionsController'})
+        .when('/coe/discussions', {templateUrl: 'partials/Discussions.html', controller: 'DiscussionsController', resolve:{
+            pageType: function () {
+                return 'COE';
+            }
+        }})
         //
         //.when('/trainings/documents', {
         //    templateUrl: 'partials/fileupload.html', controller: 'DocumentsController', resolve: {
@@ -42,11 +50,16 @@ angular.module('siteApp').config(['$routeProvider', function ($routeProvider) {
         //})
         //.when('/trainings/blogs', {templateUrl: 'partials/Blog.html', controller: 'BlogsController'})
         //.when('/trainings/discussions', {templateUrl: 'partials/Discussions.html', controller: 'DiscussionsController'})
-        //
-        //.when('/projects/:projectname', {
-        //    templateUrl: 'partials/ProjectDetails.html',
-        //    controller: 'ProjetListController'
-        //})
+
+        .when('/projects/:projectname', {
+            templateUrl: 'partials/ProjectDetails.html',
+            controller: 'ProjectDetailController',
+            resolve: {
+                pageType: function () {
+                    return 'PROJECT';
+                }
+            }
+        })
 
         .otherwise({redirectTo: '/home'});
 }]);

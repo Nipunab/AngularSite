@@ -6,7 +6,7 @@
         <ul class="pure-menu-list">
             <li class="pure-menu-item"ng-if="pageType==='PROJECT'" ng-click="ShowProjectList()"><a href="" class="pure-menu-link">Projects List</a>
                 <ul ng-show = "IsProjectVisible" class="projects-list">
-                     <li ng-repeat="projectItem in Projects"> <a ng-href="#/projects/"></a></li>
+                    <li ng-repeat="projectItem in Projects"> <a ng-href="#/projects/{{projectItem.Name.toLowerCase()}}">{{projectItem.Name}}</a></li>
                 </ul>
             </li>
             <li class="pure-menu-item" ng-if="pageType==='COE'"  ng-click="ShowCOEList()"><a href="" class="pure-menu-link">Practise List</a>
@@ -15,9 +15,9 @@
                      <li ng-repeat="practiseItem in Practise"> <a ng-href="#/coe/"></a></li>
                 </ul>
             </li>
-            <li class="pure-menu-item"><a ng-click="navigateToPage('documents', pageType)" href="#/projects/documents" class="pure-menu-link">Documents</a>
+            <li class="pure-menu-item"><a ng-click="navigateToPage('documents', pageType)" href="" class="pure-menu-link">Documents</a>
             </li>
-            <li class="pure-menu-item"><a  ng-click="navigateToPage('discussions', pageType)" href="#/projects/discussions" class="pure-menu-link">Discussions</a></li>
+            <li class="pure-menu-item"><a  ng-click="navigateToPage('discussions', pageType)" href="" class="pure-menu-link">Discussions</a></li>
             <li class="pure-menu-item"><a ng-click="navigateToPage('blogs', pageType)" href=""  class="pure-menu-link">Blogs</a></li>
             <!--<a href="#/{{pageType === 'PROJECT' ? 'projects' : 'coe'}}/blogs"></a>-->
         </ul>

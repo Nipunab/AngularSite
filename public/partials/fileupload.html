@@ -1,6 +1,6 @@
-<div ng-controller = "DocumentsController" class="document-container">
+<div class="document-container">
  <div class="sidebar">
-       <side-nav is-project="isProject" is-practise="isCoe"></side-nav>
+       <side-nav page-type="{{pageType}}"></side-nav>
   </div>
     <input type="file" file-model="myFile"/>
     <button ng-click="uploadFile()">upload me</button>  

@@ -1,22 +1,20 @@
 <div id="layout" class="pure-g">
     <div class="sidebar">
-       <side-nav></side-nav>
-  </div>
-    
-	 <div class="discussion-container pure-u-1"> 
-		 
-		<div ng-controller="DiscussionsController" class="discussion-sidebar">
-		  <p>Name : <input type="text" ng-model="newmessage.user"></p>
-		  <p>Message :<textarea type="text" ng-model="newmessage.text"></textarea></p>
-		  <button ng-click="inserting(newmessage)">Submit</button>
-		</div>
-		<div class="discussion-content pure-u-1">
-		<h2>Team Discussions</h2>
-			  	<ul>
-			  		<li ng-repeat="message in messages">
-			  			Name: {{message.user}} - Message:{{message.text}}
-			  		</li>
-			  	</ul>
-		</div>
-	</div>  
+        <side-nav page-type="{{pageType}}"></side-nav>
+    </div>
+    <div class="discussion-container pure-u-1">
+        <div class="discussion-sidebar">
+            <p>Name : <input type="text" ng-model="newmessage.user"></p>
+            <p>Message :<textarea type="text" ng-model="newmessage.text"></textarea></p>
+            <button ng-click="inserting(newmessage)">Submit</button>
+        </div>
+        <div class="discussion-content pure-u-1">
+            <h2>Team Discussions</h2>
+            <ul>
+                <li ng-repeat="message in messages">
+                    Name: {{message.user}} - Message:{{message.text}}
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
