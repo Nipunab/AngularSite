@@ -30,7 +30,13 @@ var deleteProject = function (data) {
         console.log('ERR');
     });
 };
-
+var getPractise = function ($http, $scope) {
+    $http({method: "GET", url: "http://localhost:5654/table/practise"}).then(function (practiseResponse) {
+        $scope.Practise = practiseResponse.data.Body.list;
+    }, function () {
+        console.log("Server not responding!!");
+    });
+};
 //e.g:-  addEmployee({ "FName": "Nipuna"});
 //checkout db/lib/models.js for Properties mentioned for Employee table
 var addPractise = function (data) {
@@ -44,7 +50,17 @@ var addPractise = function (data) {
         console.log('ERR');
     });
 };
-
+//e.g:- deleteProject({ "Id": "d32erewrwerewrerwer"})
+var deletePractise = function (data) {
+    angular.element('body').injector().get('$http')({
+        method: "DELETE",
+        url: "http://localhost:5654/table/practise?Id=" + data["Id"]
+    }).then(function (dt) {
+        console.log(dt);
+    }).catch(function () {
+        console.log('ERR');
+    });
+};
 //e.g:-  addEmployee({ "FName": "Nipuna"});
 //checkout db/lib/models.js for Properties mentioned for Employee table
 var addEmployee = function (data) {
@@ -66,10 +82,39 @@ var getEmployee = function ($http, $scope) {
         console.log("Server not responding!!");
     });
 };
-var getPractise = function ($http, $scope) {
-    $http({method: "GET", url: "http://localhost:5654/table/practise"}).then(function (practiseResponse) {
-        $scope.Practise = practiseResponse.data.Body.list;
+
+//e.g:-  addEmployee({ "FName": "Nipuna"});
+//checkout db/lib/models.js for Properties mentioned for Employee table
+var getTrainings = function ($http, $scope) {
+    $http({method: "GET", url: "http://localhost:5654/table/trainings"}).then(function (trainingResponse) {
+        $scope.trainings = trainingResponse.data.Body.list;
     }, function () {
         console.log("Server not responding!!");
     });
 };
+
+var addTrainings = function (data) {
+    angular.element('body').injector().get('$http')({
+        method: "POST",
+        url: "http://localhost:5654/table/trainings",
+        data: {"TName": data["TName"]}
+    }).then(function (dt) {
+        console.log(dt);
+    }).catch(function () {
+        console.log('ERR');
+    });
+};
+//e.g:- deleteProject({ "Id": "d32erewrwerewrerwer"})
+var deleteTrainings = function (data) {
+    angular.element('body').injector().get('$http')({
+        method: "DELETE",
+        url: "http://localhost:5654/table/trainings?Id=" + data["Id"]
+    }).then(function (dt) {
+        console.log(dt);
+    }).catch(function () {
+        console.log('ERR');
+    });
+};
+
+
+

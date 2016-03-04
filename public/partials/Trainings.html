@@ -5,24 +5,7 @@
                 <!-- Hamburger icon -->
                 <span></span>
             </a>
-        <div class="pure-u-md-1-6" id="menu">
-            <div class="pure-menu">
-                <a class="pure-menu-heading" href="">Trainings</a>
-
-                <ul class="pure-menu-list">
-                    <li class="pure-menu-item" ng-click="ShowPractiseList()">
-                        <a href="" class="pure-menu-link">Practise</a>
-                    <ul ng-show = "TrainingsVisible" class="trainings-list">
-                             
-                            <li ng-repeat="practiseItem in Practise"><a href="#">{{practiseItem.PName}}</a></li>
-                        </ul>
-                    </li>
-                    <li class="pure-menu-item"><a href="#/trainings/documents" class="pure-menu-link">Documents</a></li>
-                    <li class="pure-menu-item" ><a href="#/trainings/discussions" class="pure-menu-link">Team Discussions</a></li>
-                    <li class="pure-menu-item" ><a href="#/trainings/blogs" class="pure-menu-link">Blogs</a></li> 
-                </ul>
-            </div>
-        </div>
+        <side-nav page-type="TRAININGS" ></side-nav>
 
         <div class="pure-u-md-3"  id="main">
             <div class="header">

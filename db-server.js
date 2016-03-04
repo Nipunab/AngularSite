@@ -24,14 +24,23 @@ nbServer.ModelHash["projects"] = function (obj) {
 
 nbServer.ModelHash["employee"] = function (obj) {
     this.Id = obj["Id"] || nbServer.guid();
-    this.Name = obj["Name"];
+    this.FName = obj["FName"];
+     this.LName = obj["LName"];
+      this.EmpId = obj["EmpId"];
 };
 
 nbServer.ModelHash["practise"] = function (obj) {
     this.Id = obj["Id"] || nbServer.guid();
-    this.Name = obj["Name"];
+    this.PName = obj["PName"];
 
     this.Lead = obj["Lead"];
 };
+nbServer.ModelHash["trainings"] = function (obj) {
+    this.Id = obj["Id"] || nbServer.guid();
+    this.TName = obj["TName"];
+
+    this.Lead = obj["Lead"];
+};
+
 
 nbServer.init();

@@ -14,9 +14,17 @@ angular.module('siteApp').directive('sideNav', function ($http, $location) {
             $scope.Practise = [];
 
             getPractise($http, $scope);
-            $scope.IsCOEVisible = false;
+            $scope.IsPractiseVisible = false;
             $scope.ShowCOEList = function () {
-                $scope.IsCOEVisible = $scope.IsCOEVisible ? false : true;
+                $scope.IsPractiseVisible = $scope.IsPractiseVisible ? false : true;
+            };
+            
+             $scope.Trainings = [];
+
+            getTrainings($http, $scope);
+            $scope.IsTrainingVisible = false;
+            $scope.ShowTrainingList = function () {
+                $scope.IsTrainingVisible = $scope.IsTrainingVisible ? false : true;
             };
 
             $scope.navigateToPage = function (toPage, pageType) {
@@ -26,6 +34,9 @@ angular.module('siteApp').directive('sideNav', function ($http, $location) {
                         break;
                     case 'COE':
                         $location.path('/coe/' + toPage);
+                        break;
+                    case 'TRAININGS':
+                        $location.path('/trainings/'+toPage);
                         break;
                 }
             }
