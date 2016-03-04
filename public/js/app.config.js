@@ -59,7 +59,7 @@ angular.module('siteApp').config(['$routeProvider', function ($routeProvider) {
             }
         })
 
-           .when('/practise/:practisename', {
+           .when('/coe/:practisename', {
             templateUrl: 'partials/PractiseDetails.html',
             controller: 'PractiseDetailController',
             resolve: {
@@ -69,7 +69,7 @@ angular.module('siteApp').config(['$routeProvider', function ($routeProvider) {
             }
         })
 
-               .when('/training/:trainingname', {
+               .when('/trainings/:trainingname', {
             templateUrl: 'partials/TrainingDetails.html',
             controller: 'TrainingDetailController',
             resolve: {
