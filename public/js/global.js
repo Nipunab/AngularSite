@@ -87,7 +87,7 @@ var getEmployee = function ($http, $scope) {
 //checkout db/lib/models.js for Properties mentioned for Employee table
 var getTrainings = function ($http, $scope) {
     $http({method: "GET", url: "http://localhost:5654/table/trainings"}).then(function (trainingResponse) {
-        $scope.trainings = trainingResponse.data.Body.list;
+        $scope.Trainings = trainingResponse.data.Body.list;
     }, function () {
         console.log("Server not responding!!");
     });

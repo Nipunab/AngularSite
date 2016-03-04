@@ -4,17 +4,14 @@ angular.module('siteApp').config(['$routeProvider', function ($routeProvider) {
         .when('/projects', {templateUrl: 'partials/Projects.html', controller: 'ProjectsController'})
         .when('/coe', {templateUrl: 'partials/COE.html', controller: 'COEController'})
         .when('/trainings', {templateUrl: 'partials/Trainings.html', controller: 'TrainingsController'})
-       
+       .when('/discussions', {templateUrl: 'partials/Discussions.html', controller: 'DiscussionController'})
+
         .when('/projects/blogs', {templateUrl: 'partials/Blog.html', controller: 'BlogsController', resolve:{
             pageType: function () {
                 return 'PROJECT';
             }
         }})
-        .when('/projects/discussions', {templateUrl: 'partials/Discussions.html', controller: 'DiscussionsController', resolve:{
-            pageType: function () {
-                return 'PROJECT';
-            }
-        }})
+         
         .when('/projects/documents', {
             templateUrl: 'partials/fileupload.html', controller: 'DocumentsController', resolve: {
                 pageType: function () {
@@ -35,31 +32,22 @@ angular.module('siteApp').config(['$routeProvider', function ($routeProvider) {
                 return 'COE';
             }
         }})
-        .when('/coe/discussions', {templateUrl: 'partials/Discussions.html', controller: 'DiscussionsController', resolve:{
-            pageType: function () {
-                return 'COE';
-            }
-        }})
+         
         
           .when('/trainings/documents', {
               templateUrl: 'partials/fileupload.html', controller: 'DocumentsController', resolve: {
-                 pagetype: function () {
+                 pageType: function () {
                    return 'TRAININGS';
                 }
            }
         })
         .when('/trainings/blogs', {templateUrl: 'partials/Blog.html', controller: 'BlogsController', resolve: {
-                 pagetype: function () {
+                 pageType: function () {
                    return 'TRAININGS';
                }
             }
         })
-        .when('/trainings/discussions', {templateUrl: 'partials/Discussions.html', controller: 'DiscussionsController', resolve: {
-                 pagetype: function () {
-                   return 'TRAININGS';
-               }
-             }
-        })
+         
 
         .when('/projects/:projectname', {
             templateUrl: 'partials/ProjectDetails.html',
@@ -67,6 +55,26 @@ angular.module('siteApp').config(['$routeProvider', function ($routeProvider) {
             resolve: {
                 pageType: function () {
                     return 'PROJECT';
+                }
+            }
+        })
+
+           .when('/practise/:practisename', {
+            templateUrl: 'partials/PractiseDetails.html',
+            controller: 'PractiseDetailController',
+            resolve: {
+                pageType: function () {
+                    return 'COE';
+                }
+            }
+        })
+
+               .when('/training/:trainingname', {
+            templateUrl: 'partials/TrainingDetails.html',
+            controller: 'TrainingDetailController',
+            resolve: {
+                pageType: function () {
+                    return 'TRAININGS';
                 }
             }
         })
