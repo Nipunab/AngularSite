@@ -2,6 +2,6 @@
  <div class="sidebar">
        <side-nav page-type="{{pageType}}"></side-nav>
   </div>
-    <input type="file" file-model="myFile"/>
-    <button ng-click="uploadFile()">upload me</button>  
+    <input type="file" file-model="myFile" file-on-change="uploadFiles" />
+    <button ng-click="saveFiles()">upload me</button>
 </div>

@@ -1,1 +1,1 @@
-var siteApp = angular.module('siteApp', ['ngRoute', 'firebase']);
+var siteApp = angular.module('siteApp', ['ngRoute', 'firebase', 'ng-chunk-upload']);

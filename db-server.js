@@ -1,16 +1,5 @@
 var nbServer = require('nb-json-db');
 
-/*
-    E.g:-
-    nbServer["tablename"] = function(obj){
-        this.PropertyName = obj["PropertyName"];
-    }
-
-    for "Id" property we must use below way
-        this.Id = obj["Id"] || nbServer.guid();
-    As we use 'Id' property for unique/identification purpose
-*/
-
 
 nbServer.rootPath = __dirname;
 
@@ -43,4 +32,10 @@ nbServer.ModelHash["trainings"] = function (obj) {
 };
 
 
-nbServer.init();
+//nbServer.init();
+
+
+
+//file upload server code
+var fileServer = require('./file-upload-server.js');
+fileServer.init();
