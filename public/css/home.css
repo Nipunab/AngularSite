@@ -134,7 +134,7 @@ a.pure-button-primary {
 
 .splash-container {
     background: #1f8dd6;
-    z-index: 1;
+    z-index: -1;
     overflow: hidden;
     /* The following styles are required for the "scroll-over" effect */
     width: 100%;
@@ -237,6 +237,14 @@ a.pure-button-primary {
         padding: 1em;
     }
 
+    .pure-menu-heading-small{
+        display: none;
+    }
+
+
+    .pure-menu-heading{
+        display: block;
+    }
     /* We can align the menu header to the left, but float the
     menu items to the right. */
     .home-menu {
@@ -267,7 +275,21 @@ a.pure-button-primary {
     .l-box-lrg {
         border: none;
     }
-
+    .discussion-sidebar{
+        bottom: 0;
+        padding: 30px;
+        position: fixed;
+        top: 75px;
+        background: #585858; 
+    }
+.discussion-content{    
+    position: absolute;
+}
+ .discussion-content ul{
+      left: 35%;
+    position: absolute;
+    margin:0px;
+ }
 }
 
 /*
@@ -287,25 +309,28 @@ a.pure-button-primary {
     position:relative;
 }
  .discussion-sidebar{
-   left: 22%;
-    padding: 30px;
-    position: absolute;
-    top: 80px;
-    width: 30%;
-    background: rgb(61, 79, 93); 
+        bottom: 0;
+        padding: 30px; 
+        top: 75px;
+        background: #585858; 
     }
-    .discussion-sidebar p{
+.discussion-sidebar p{
         color:#C0C0C0;
         padding:10px;
     }
-.discussion-content{
-      left: 60%;
-     top: 60px; 
-    position: absolute;
-}
+
  
  .document-container{
-    left: 25%;
-    margin-top: 150px;
+    left: 25%; 
     position: relative;
+ }
+
+ .header-list{
+    float:right;
+ }
+ @media (max-width: 48em) {
+   .document-container{
+    left: 0;
+    margin-top: 0; 
+ }
  }

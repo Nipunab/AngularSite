@@ -32,7 +32,7 @@ nbServer.ModelHash["trainings"] = function (obj) {
 };
 
 
-//nbServer.init();
+nbServer.init();
 
 
 

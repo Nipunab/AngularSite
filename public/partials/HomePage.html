@@ -90,11 +90,9 @@
 
 				<div class="l-box-lrg pure-u-1 pure-u-md-3-5">
 					<h4>New Employees</h4>
-					  <ul class="employee-list">
-                          <li class="pure-menu-item">
-					  		   <li ng-repeat="empDetails in Employee">  FirstName:{{empDetails.FName}} <span>LastName: {{empDetails.LName}}</span>
-                          		 Joining Date: {{empDetails.JoinedDate}}EMPID: {{empDetails.EmpId}} </li> 
-                    	 </li>
+					  <ul class="employee-list"> 
+					  		   <li ng-repeat="empDetails in Employee">  <b>FirstName:</b>{{empDetails.FName}} <span><b>LastName:</b> {{empDetails.LName}}</span>
+                          		 <b>Joining Date:</b> {{empDetails.JoinedDate}}EMPID: {{empDetails.EmpId}} </li>  
                       </ul>
 				</div>
 			</div>

@@ -2,14 +2,16 @@
       
     <div class="discussion-container pure-u-1">
     <h2>Discussions Page</h2>
-        <div class="discussion-sidebar pure-u-md-1-5">
+        <div class="discussion-sidebar pure-u-1 pure-u-md-1-4">
             <p>Name : <input type="text" ng-model="newmessage.user"></p>
             <p>Message :<textarea type="text" ng-model="newmessage.text"></textarea></p>
             <button ng-click="inserting(newmessage)">Submit</button>
         </div>
-        <div class="discussion-content pure-u-1 pure-u-md-3">
-            <h2>Team Discussions</h2>
+
+        <div class="discussion-content pure-u-1 pure-u-md-1">
+           
             <ul>
+             <h2>Team Discussions</h2>
                 <li ng-repeat="message in messages">
                     Name: {{message.user}} - Message:{{message.text}}
                 </li>

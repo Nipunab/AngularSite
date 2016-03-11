@@ -82,7 +82,17 @@ var getEmployee = function ($http, $scope) {
         console.log("Server not responding!!");
     });
 };
-
+//e.g:- deleteProject({ "Id": "d32erewrwerewrerwer"})
+var deleteEmployee = function (data) {
+    angular.element('body').injector().get('$http')({
+        method: "DELETE",
+        url: "http://localhost:5654/table/employee?Id=" + data["Id"]
+    }).then(function (dt) {
+        console.log(dt);
+    }).catch(function () {
+        console.log('ERR');
+    });
+};
 //e.g:-  addEmployee({ "FName": "Nipuna"});
 //checkout db/lib/models.js for Properties mentioned for Employee table
 var getTrainings = function ($http, $scope) {

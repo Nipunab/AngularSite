@@ -1,25 +1,23 @@
+
  .project-details,.practise-details,.training-details {
     width: 80%;
     margin-left:18%;
     margin-top:35px;
  }
+
  .project-list-container,.practise-list-container,.training-list-container h3{
         margin:0px;
     }
-   .project-list-container .banner-section{
-        width:100%;height:200px;
+   .project-list-container .banner-section,.aboutus-section{
+        width:100%;height:auto;
     }
-   .project-list-container .aboutus-section{
-        width:100%;height:200px;
+   
+   .project-list-container .team-details,.tech-details{
+        width:100%;height:auto;clear:both;
     }
-   .project-list-container .team-details{
-        width:100%;height:630px;  background-color: #99ff99;
-    }
-    .tech-details{
-        width:100%;height:340px; 
-    }
+    
     .info-section{
-        width:100%;height:100px;  font-style: oblique;
+        width:100%;height:auto;  font-style: oblique;clear: both;margin-bottom: 5%;
     }
     .team-mates{
         width:200px;height:200px;background-color:#5c9a1b;float:left;margin:50px;border-radius:100px;
@@ -38,15 +36,19 @@
     }
 
   
-    .practise-list-container .announcement-section{
-        width:100%;height:200px;
+    .practise-list-container .announcement-section, .task-section,.calendar-details{
+        width:100%;height:auto;
     }
-   .practise-list-container .task-section{
-        width:100%;height:200px;
-    }
-   .practise-list-container .calendar-details{
-        width:100%;height:630px;   
-    
+  
     .link-section{
-        width:100%;height:100px;  font-style: oblique;
+        width:100%;height:auto;  font-style: oblique;
+    }
+
+       
+ @media (max-width: 48em) {
+         .project-details,.practise-details,.training-details {
+            width: 80%;
+            margin-left:10%;
+            margin-top:35px;
+        }
     }

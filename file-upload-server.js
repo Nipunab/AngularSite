@@ -104,6 +104,8 @@ var resumableHandler = function (req, res, headers) {
         bufferChunkCount = bufferChunkCount + 1;
 
         if(parseInt(qParams.chunkCount) == bufferChunkCount){
+            
+            bufferChunkCount = 0;
             var fallBackCount = 0;
             for(var i = 0; i < bufferData.length ; i++){
                 fs.appendFile(__dirname + '/files/' + qParams.fileName, bufferData[i], 'binary', function (err) {
