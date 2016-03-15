@@ -31,6 +31,13 @@ nbServer.ModelHash["trainings"] = function (obj) {
     this.Lead = obj["Lead"];
 };
 
+nbServer.ModelHash["users"] = function (obj) {
+    this.Id = obj["Id"] || nbServer.guid();
+    this.Username = obj["Username"];
+
+    this.Password = obj["Password"];
+};
+
 
 nbServer.init();
 

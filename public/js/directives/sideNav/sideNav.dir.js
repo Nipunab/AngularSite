@@ -11,33 +11,33 @@ angular.module('siteApp').directive('sideNav', function ($http, $location) {
             };
 
 
-            $scope.Practise = [];
+            // $scope.Practise = [];
 
-            getPractise($http, $scope);
-            $scope.IsPractiseVisible = false;
-            $scope.ShowCOEList = function () {
-                $scope.IsPractiseVisible = $scope.IsPractiseVisible ? false : true;
-            };
+            // getPractise($http, $scope);
+            // $scope.IsPractiseVisible = false;
+            // $scope.ShowCOEList = function () {
+            //     $scope.IsPractiseVisible = $scope.IsPractiseVisible ? false : true;
+            // };
             
-             $scope.Trainings = [];
+            //  $scope.Trainings = [];
 
-            getTrainings($http, $scope);
-            $scope.IsTrainingVisible = false;
-            $scope.ShowTrainingList = function () {
-                $scope.IsTrainingVisible = $scope.IsTrainingVisible ? false : true;
-            };
+            // getTrainings($http, $scope);
+            // $scope.IsTrainingVisible = false;
+            // $scope.ShowTrainingList = function () {
+            //     $scope.IsTrainingVisible = $scope.IsTrainingVisible ? false : true;
+            // };
 
             $scope.navigateToPage = function (toPage, pageType) {
                 switch (pageType){
                     case 'PROJECT':
                         $location.path('/projects/' + toPage);
                         break;
-                    case 'COE':
-                        $location.path('/coe/' + toPage);
-                        break;
-                    case 'TRAININGS':
-                        $location.path('/trainings/'+toPage);
-                        break;
+                    // case 'COE':
+                    //     $location.path('/coe/' + toPage);
+                    //     break;
+                    // case 'TRAININGS':
+                    //     $location.path('/trainings/'+toPage);
+                    //     break;
                 }
             }
 
