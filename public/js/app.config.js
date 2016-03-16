@@ -1,6 +1,6 @@
 angular.module('siteApp').config(['$routeProvider', function ($routeProvider) {
     $routeProvider
-    .when('/login', {templateUrl: 'partials/Login.html', controller: 'LoginController'})
+    .when('/login', {templateUrl: 'partials/LoginForm.html', controller: 'LoginController'})
         .when('/home', {templateUrl: 'partials/HomePage.html', controller: 'HomePageController'})
         .when('/projects', {templateUrl: 'partials/Projects.html', controller: 'ProjectsController'})
          .when('/coe', {templateUrl: 'partials/COE.html', controller: 'COEController'})
