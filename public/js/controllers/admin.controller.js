@@ -30,7 +30,7 @@ angular.module('siteApp').controller('adminCntl', function ($scope, Message, $ro
     $scope.Employees = [];
 
     $scope.NewEmployee = {};
-    $scope.NewEmployee.UserType == "USER";
+    $scope.NewEmployee.UserType = "USER";
     api.getEmployee().then(function (Employees) {
         $scope.Employees = Employees;
         $scope.IsEmployeeLoading = false;
