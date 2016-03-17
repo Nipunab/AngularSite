@@ -10,9 +10,9 @@ nbServer.ModelHash["projects"] = function (obj, isNew) {
     this.Id = obj["Id"] || nbServer.guid();
     this.Name = obj["Name"];
 
-    if(isNew){
+    if (isNew) {
         this.CreatedDate = new Date().getTime();
-    }else{
+    } else {
         this.CreatedDate = obj["CreatedDate"];
     }
     this.CreatedBy = obj["CreatedBy"];
@@ -38,9 +38,9 @@ nbServer.ModelHash["documents"] = function (obj, isNew) {
     this.StorageToken = obj["StorageToken"];
     this.Category = obj["Category"]; // Projects, COE
 
-    if(isNew){
+    if (isNew) {
         this.UploadedDate = new Date().getTime();
-    }else{
+    } else {
         this.UploadedDate = obj["UploadedDate"];
     }
 };
@@ -63,7 +63,7 @@ nbServer.ModelHash["employee"].EncryptedFields = ["Password"];
 
 nbServer.LoginFields = {
     "TableName": "employee",
-    "Fields":{
+    "Fields": {
         "UserNameField": "Username",
         "PasswordField": "Password",
         "UserTypeField": "UserType"
@@ -76,11 +76,12 @@ nbServer.RootUserName = "nipuna";
 nbServer.RootPassword = "nipuna";
 
 
+module.exports = {
+    init: function (dbPort) {
+        nbServer.dBPort = dbPort || 5654;
+        nbServer.init();
 
-nbServer.init();
-
-
-
-//file upload server code
-var fileServer = require('./file-upload-server.js');
-fileServer.init();
+        var fileServer = require('./file-upload-server.js');
+        fileServer.init();
+    }
+};
