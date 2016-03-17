@@ -1,0 +1,58 @@
+<div>
+    <h3>Admin Page</h3>
+    <div>
+        <h4>Projects</h4>
+        <div ng-if="IsProjectsLoading"> Loading....</div>
+        <div ng-if="IsProjectsLoading == false">
+            <div>
+                <input type="text" placeholder="Project Name" ng-model="NewProject.Name"/>
+                <input type="button" value=" Add Project " ng-click="addItem('PROJECT', NewProject)"/>
+            </div>
+            <ul>
+                <li ng-repeat="project in Projects">
+                    {{ project.Name}} <a href="" ng-click="deleteItem('PROJECT', project)">Delete</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div>
+        <h4>Projects</h4>
+        <div ng-if="IsPractiseLoading"> Loading....</div>
+        <div ng-if="IsPractiseLoading == false">
+            <ul >
+                <li ng-repeat="practise in Practises">
+                    {{ practise.PName}}
+                    <a href="" ng-click="deleteItem('PRACTISE', practise)">Delete</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div>
+        <h4>Employee</h4>
+        <div ng-if="IsEmployeeLoading"> Loading....</div>
+        <div ng-if="IsEmployeeLoading == false">
+            <div>
+                <input type="text" placeholder="First Name" ng-model="NewEmployee.FName" />
+                <input type="text" placeholder="Last Name" ng-model="NewEmployee.LName"/>
+                <input type="text" placeholder="User Name" ng-model="NewEmployee.Username" />
+                <input type="text" placeholder="Password" ng-model="NewEmployee.Password" />
+                <input type="text" placeholder="Confirm Password"  />
+                <input type="text" placeholder="Email Id" ng-model="NewEmployee.EmailId" />
+
+                <select ng-model="NewEmployee.UserType">
+                    <option value="USER">User</option>
+                    <option value="ADMIN">Admin</option>
+                </select>
+
+                <input type="button" value=" Add Employee " ng-click="addItem('EMPLOYEE', NewEmployee)" />
+            </div>
+            <ul>
+                <li ng-repeat="employee in Employees">
+                    {{ employee.Username}}
+                    <a href="" ng-click="deleteItem('EMPLOYEE', employee)">Delete</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>

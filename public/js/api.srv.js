@@ -1,13 +1,18 @@
-var nbJsonDbApp = angular.module('nb-json-db', []);
-
-nbJsonDbApp.service('nb-db-api', function () {
+angular.module('siteApp').service('api', function ($rootScope) {
     this.Name = "Murali";
 
+    var that = this;
     var makeRequest = function (url, method, content, options) {
+        var lToken = getCookieVal("lToken");
+        var queryParamString = '';
+        if(lToken && lToken != 'TOKEN'){
+            queryParamString = (url.indexOf('?') >= 0 ? '&' : '?') +  "lToken=" + lToken;
+        }
+
         return new Promise(function (resolve, reject) {
             $.ajax({
-                url: url,
-                method: 'POST',
+                url: url + queryParamString,
+                method: method,
                 data: content,
                 complete: function (aResponse) {
                     resolve(aResponse);
@@ -18,21 +23,98 @@ nbJsonDbApp.service('nb-db-api', function () {
     };
 
     this.get = function (url, content, options) {
-        var aObj = {};
-        aObj.aName = "DB";
-        aObj.aMethod = "POST";
-        return makeRequest(url);
+        return makeRequest(url, "GET");
     };
 
-    this.post = function () {
-        return makeRequest(url);
+    this.post = function (url, content) {
+        return makeRequest(url, 'POST', content);
     };
 
-    this.delete = function () {
-        return makeRequest(url);
+    this.delete = function (url) {
+        return makeRequest(url, 'DELETE');
     };
-    this.getEmployee= function(){
-        return makeRequest(url);
+
+    this.login = function (userInfo) {
+        var queryParamString = "";
+
+        if(userInfo){
+            queryParamString = "?username=" + encodeURIComponent(userInfo.Username) + "&password=" + encodeURIComponent(userInfo.Password);
+        }
+        return that.get('http://localhost:5654/login' + queryParamString)
+            .then(function (resp) {
+                if (resp.Body.tokenObject) {
+                    document.cookie = "lToken=" + resp.Body.tokenObject;
+                    document.cookie = "uid=" + resp.Body.UserId;
+
+                    //invoking listener event on rootScope named 'login-changed' with 'IsAuthentiated' as true
+                    //As token is valid for logged in user.
+                    $rootScope.$emit('login-changed', { IsAuthenticated: true });
+                    $rootScope.Username = userInfo ? userInfo.Username : "guest";
+                    return {"Status": true};
+                } else {
+                    $rootScope.$emit('login-changed', { IsAuthenticated: false });
+                    $rootScope.Username = null;
+                    return {"Status": false};
+                }
+            });
+    };
+
+
+    this.getProjects = function () {
+        return that.get('http://localhost:5654/table/projects').then(function (resp) {
+           if(resp.Body && resp.Body.list){
+                return resp.Body.list;
+           } else{
+                return [];
+           }
+        });
+    };
+
+    this.getPractise = function () {
+        return that.get('http://localhost:5654/table/practise').then(function (resp) {
+            if(resp.Body && resp.Body.list){
+                return resp.Body.list;
+            } else{
+                return [];
+            }
+        });
+    };
+
+    this.getEmployee = function (username, userId) {
+        return that.get('http://localhost:5654/table/employee').then(function (resp) {
+            if(resp.Body && resp.Body.list){
+                var usersList = resp.Body.list;
+                if(username){
+                    usersList = resp.Body.list.filter(function (userItem) {
+                        return userItem.Username == username;
+                    });
+                }
+                if(userId){
+                    usersList = resp.Body.list.filter(function (userItem) {
+                        return userItem.Id == userId;
+                    });
+                }
+                return usersList;
+            } else{
+                return [];
+            }
+        });
+    };
+
+    this.addEmployee = function (employee) {
+        return that.post('http://localhost:5654/table/employee', employee).then(function (resp) {
+            return resp.Body;
+        });
+    };
+
+    this.deleteProject = function (itemToDelete) {
+        return that.delete('http://localhost:5654/table/projects?Id=' + itemToDelete.Id);
+    };
+
+    this.addProject = function (itemToAdd) {
+        return that.post('http://localhost:5654/table/projects', itemToAdd).then(function (resp) {
+            return resp.Body;
+        });
     };
 
 });

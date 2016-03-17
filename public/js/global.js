@@ -1,3 +1,36 @@
+var makeRequest = function (url, method, data, $http) {
+    var reqPromise = null;
+    if($http) {
+        reqPromise = $http({method: method, url: url, data: data});
+    }else{
+        reqPromise = angular.element('body').injector().get('$http')({
+            method: method,
+            url: url,
+            data: data
+        });
+    }
+    return reqPromise.then(function (resp) {
+
+    }).catch(function () {
+
+    });
+};
+
+function getCookieVal(cName) {
+    var cVal = null;
+    document.cookie.split(';').forEach(function (h) {
+        if(h.indexOf('=') > 0) {
+            var cookieName = h.split('=')[0];
+            var cookieVal = h.split('=')[1];
+            if (cookieName.replace(/ /g, '') == cName) {
+                cVal = cookieVal;
+                return cookieVal;
+            }
+        }
+    });
+    return cVal;
+}
+
 var getProjects = function ($http, $scope) {
     $http({method: "GET", url: "http://localhost:5654/table/projects"}).then(function (projectResponse) {
         $scope.Projects = projectResponse.data.Body.list;
@@ -77,7 +110,11 @@ var addEmployee = function (data) {
 
 var getEmployee = function ($http, $scope) {
     $http({method: "GET", url: "http://localhost:5654/table/employee"}).then(function (employeeResponse) {
-        $scope.Employee = employeeResponse.data.Body.list;
+        if(employeeResponse.data && employeeResponse.data.Body && employeeResponse.data.Body.list){
+            $scope.Employee = employeeResponse.data.Body.list;
+        }else{
+            $scope.Employee = [];
+        }
     }, function () {
         console.log("Server not responding!!");
     });

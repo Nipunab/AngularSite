@@ -1,10 +1,15 @@
-angular.module('siteApp').directive('sideNav', function ($http, $location) {
+angular.module('siteApp').directive('sideNav', function ($http, $location, api) {
     return {
         restrict: 'E',
         controller:function($scope){
             $scope.Projects = [];
 
-            getProjects($http, $scope);
+            //getProjects($http, $scope);
+
+            api.getProjects().then(function (projects) {
+                $scope.Projects = projects;
+            });
+
             $scope.IsProjectVisible = false;
             $scope.ShowProjectList = function () {
                 $scope.IsProjectVisible = $scope.IsProjectVisible ? false : true;
@@ -13,19 +18,26 @@ angular.module('siteApp').directive('sideNav', function ($http, $location) {
 
              $scope.Practise = [];
 
-            getPractise($http, $scope);
+
+            //getPractise($http, $scope);
+            api.getPractise().then(function (practise) {
+                $scope.Practise = practise;
+            });
+
+
+
             $scope.IsPractiseVisible = false;
              $scope.ShowCOEList = function () {
                  $scope.IsPractiseVisible = $scope.IsPractiseVisible ? false : true;
              };
-            
-             $scope.Trainings = [];
 
-            getTrainings($http, $scope);
-            $scope.IsTrainingVisible = false;
-            $scope.ShowTrainingList = function () {
-                 $scope.IsTrainingVisible = $scope.IsTrainingVisible ? false : true;
-             };
+            // $scope.Trainings = [];
+            //
+            //getTrainings($http, $scope);
+            //$scope.IsTrainingVisible = false;
+            //$scope.ShowTrainingList = function () {
+            //     $scope.IsTrainingVisible = $scope.IsTrainingVisible ? false : true;
+            // };
 
             $scope.navigateToPage = function (toPage, pageType) {
                 switch (pageType){

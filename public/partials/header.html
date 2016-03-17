@@ -1,14 +1,12 @@
 <div class="header">
-        <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
-            <a class="pure-menu-heading" href="#home">Tech360</a>
-            <!-- <a href="#" >LogOut</a> -->
-            <ul class="pure-menu-list header-list">
-                <li class="pure-menu-item"><a href="#projects" class="pure-menu-link">Projects</a></li>             
-                <li class="pure-menu-item"><a href="#coe" class="pure-menu-link">COE</a></li>
-                <li class="pure-menu-item"><a href="#trainings" class="pure-menu-link">Trainings</a></li> 
-                <li class="pure-menu-item"><a href="#discussions" class="pure-menu-link">Discussions</a></li>
-
-
-            </ul>
-        </div>
+    <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+        <a class="pure-menu-heading" href="#home">Tech360</a>
+        <!-- <a href="#" >LogOut</a> -->
+        <ul class="pure-menu-list header-list" ng-if="IsAuthenticated">
+            <li class="pure-menu-item"><a href="#projects" class="pure-menu-link">Projects</a></li>
+            <li class="pure-menu-item"><a href="#coe" class="pure-menu-link">COE</a></li>
+            <li class="pure-menu-item"><a href="#discussions" class="pure-menu-link">Discussions</a></li>
+            <li class="pure-menu-item"><a href="#" ng-click="logout()" class="pure-menu-link">Logout</a></li>
+        </ul>
+    </div>
 </div>
