@@ -9,15 +9,7 @@ angular.module('siteApp').config(['$routeProvider', function ($routeProvider) {
 
         // .when('/register', {templateUrl: 'partials/Register.html', controller: 'RegisterController'})
 
-        .when('/projects/:projectname', {
-            templateUrl: 'partials/ProjectDetails.html',
-            controller: 'ProjectDetailController',
-            resolve: {
-                pageType: function () {
-                    return 'PROJECT';
-                }
-            }
-        })
+       
 
         .when('/projects/blogs', {
             templateUrl: 'partials/Blog.html', controller: 'BlogsController', resolve: {
@@ -35,6 +27,15 @@ angular.module('siteApp').config(['$routeProvider', function ($routeProvider) {
             }
         })
 
+ .when('/projects/:projectname', {
+            templateUrl: 'partials/ProjectDetails.html',
+            controller: 'ProjectDetailController',
+            resolve: {
+                pageType: function () {
+                    return 'PROJECT';
+                }
+            }
+        })
 
         .when('/coe/documents', {
             templateUrl: 'partials/fileupload.html', controller: 'DocumentsController', resolve: {

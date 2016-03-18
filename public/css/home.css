@@ -275,21 +275,25 @@ a.pure-button-primary {
     .l-box-lrg {
         border: none;
     }
-    .discussion-sidebar{
+    .add-discussion-section{
         bottom: 0;
         padding: 30px;
         position: fixed;
         top: 75px;
         background: #585858; 
     }
-.discussion-content{    
+.discussion-list{    
     position: absolute;
 }
- .discussion-content ul{
+ .discussion-list ul{
       left: 35%;
     position: absolute;
     margin:0px;
+    width:50%;
  }
+ .discussion-list ul li{
+ border-bottom:1px solid grey;
+}
 }
 
 /*
@@ -308,13 +312,13 @@ a.pure-button-primary {
 .discussion-container{
     position:relative;
 }
- .discussion-sidebar{
+ .add-discussion-section{
         bottom: 0;
         padding: 30px; 
         top: 75px;
         background: #585858; 
     }
-.discussion-sidebar p{
+.add-discussion-section p{
         color:#C0C0C0;
         padding:10px;
     }
