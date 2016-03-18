@@ -53,7 +53,7 @@
             </div>
             <ul>
                 <li ng-repeat="employee in Employees">
-                    {{ employee.Username}}
+                    {{ employee.Username}} {{ employee.UserType}}
                     <a href="" ng-click="deleteItem('EMPLOYEE', employee)">Delete</a>
                 </li>
             </ul>

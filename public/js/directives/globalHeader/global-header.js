@@ -7,6 +7,17 @@ angular.module('siteApp').directive('globalHeader', function ($rootScope, $locat
         controller: function ($scope, api) {
             $scope.IsAuthenticated = false;
 
+            $scope.safeApply = function (fn) {
+                var phase = this.$root.$$phase;
+                if (phase == '$apply' || phase == '$digest') {
+                    if (fn && (typeof(fn) === 'function')) {
+                        fn();
+                    }
+                } else {
+                    this.$apply(fn);
+                }
+            };
+
             $rootScope.safeApply = function (fn) {
                 var phase = this.$root.$$phase;
                 if (phase == '$apply' || phase == '$digest') {
@@ -23,15 +34,21 @@ angular.module('siteApp').directive('globalHeader', function ($rootScope, $locat
             if (lToken && uid) {
                 api.login().then(function (loginResp) {
                     if (loginResp.Status) {
-                        $scope.IsAuthenticated = true;
-                        api.getEmployee(uid).then(function (myprofile) {
+                        $scope.safeApply(function () {
+                            $scope.IsAuthenticated = true;
+                        });
+                        api.getEmployee(null,uid).then(function (myprofile) {
                             if(myprofile && myprofile.length > 0){
-
                                 if(myprofile[0].UserType.toUpperCase() === "ADMIN"){
+                                    $scope.safeApply(function () {
+                                        console.log("Is Admin ");
+                                        $scope.IsAdmin = true;
+                                    });
                                     $rootScope.safeApply(function () {
                                         $rootScope.CurrentUser = myprofile[0];
                                         $location.path('/admin');
                                     });
+
                                 }else{
                                     $rootScope.safeApply(function () {
                                         $rootScope.CurrentUser = myprofile[0];
@@ -59,6 +76,36 @@ angular.module('siteApp').directive('globalHeader', function ($rootScope, $locat
             //listener on $rootScope event. event name is 'login-changed'
             $rootScope.$on('login-changed', function (er, rt) {
                 $scope.IsAuthenticated = rt.IsAuthenticated;
+                console.log("logged in changed ");
+                uid = getCookieVal('uid');
+                api.getEmployee(null,uid).then(function (myprofile) {
+                    if(myprofile && myprofile.length > 0){
+                        console.log('user type ', myprofile[0].UserType);
+                        if(myprofile[0].UserType.toUpperCase() === "ADMIN"){
+                            $scope.safeApply(function () {
+                                console.log("Is Admin ");
+                                $scope.IsAdmin = true;
+                            });
+                            $rootScope.safeApply(function () {
+                                $rootScope.CurrentUser = myprofile[0];
+                                $location.path('/admin');
+
+                            });
+
+                        }else{
+                            $scope.safeApply(function () {
+                                console.log("Is Admin ");
+                                $scope.IsAdmin = false;
+                            });
+                            $rootScope.safeApply(function () {
+                                $rootScope.CurrentUser = myprofile[0];
+                                $location.path('/home');
+                            });
+                        }
+                    }else{
+                        //user Details not available in DB
+                    }
+                });
             });
 
             $scope.logout = function () {

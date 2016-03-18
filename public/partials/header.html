@@ -7,7 +7,7 @@
             <li class="pure-menu-item"><a href="#coe" class="pure-menu-link">COE</a></li>
             <li class="pure-menu-item"><a href="#discussions" class="pure-menu-link">Discussions</a></li>
             <li class="pure-menu-item"><a href="#" ng-click="logout()" class="pure-menu-link">Logout</a></li>
-            <li class="pure-menu-item"><a href="#admin" class="pure-menu-link">Admin</a></li>
+            <li class="pure-menu-item" ng-if="IsAdmin"><a href="#admin" class="pure-menu-link">Admin</a></li>
         </ul>
     </div>
 </div>

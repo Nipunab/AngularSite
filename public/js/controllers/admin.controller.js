@@ -14,15 +14,19 @@ angular.module('siteApp').controller('adminCntl', function ($scope, Message, $ro
     $scope.IsProjectsLoading = true;
     $scope.Projects = [];
     api.getProjects().then(function (projects) {
-        $scope.Projects = projects;
-        $scope.IsProjectsLoading = false;
+        $scope.safeApply(function () {
+            $scope.Projects = projects;
+            $scope.IsProjectsLoading = false;
+        });
     });
 
     $scope.IsPractiseLoading = true;
     $scope.Practises = [];
     api.getPractise().then(function (practises) {
-        $scope.Practises = practises;
-        $scope.IsPractiseLoading = false;
+        $scope.safeApply(function () {
+            $scope.Practises = practises;
+            $scope.IsPractiseLoading = false;
+        });
     });
 
 
@@ -32,8 +36,10 @@ angular.module('siteApp').controller('adminCntl', function ($scope, Message, $ro
     $scope.NewEmployee = {};
     $scope.NewEmployee.UserType = "USER";
     api.getEmployee().then(function (Employees) {
-        $scope.Employees = Employees;
-        $scope.IsEmployeeLoading = false;
+        $scope.safeApply(function () {
+            $scope.Employees = Employees;
+            $scope.IsEmployeeLoading = false;
+        });
     });
 
     $scope.addItem = function (typ, itemToAdd) {
