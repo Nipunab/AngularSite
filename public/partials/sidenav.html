@@ -1,8 +1,7 @@
 <div class="pure-u-1 pure-u-md-1-6" id="menu">
     <div class="pure-menu">
         <h3 ng-if="pageType==='PROJECT'" class="pure-menu-heading">Projects</h3>
-        <h3 ng-if="pageType==='COE'"  class="pure-menu-heading">COE</h3>
-         <h3 ng-if="pageType==='TRAININGS'"  class="pure-menu-heading">Trainings</h3>
+        <h3 ng-if="pageType==='COE'"  class="pure-menu-heading">COE</h3> 
 
         <ul class="pure-menu-list">
             <li class="pure-menu-item"ng-if="pageType==='PROJECT'" ng-click="ShowProjectList()"><a href="" class="pure-menu-link">Projects List</a>
@@ -16,13 +15,7 @@
                      <li ng-repeat="practiseItem in Practise"> <a ng-href="#/coe/{{practiseItem.PName.toLowerCase()}}">{{practiseItem.PName}}</a></li>
                 </ul>
             </li>
-             <li class="pure-menu-item" ng-if="pageType==='TRAININGS'"  ng-click="ShowTrainingList()">
-            <a href="" class="pure-menu-link">Trainings List</a>
-
-                <ul ng-show = "IsTrainingVisible" class="trainings-list">
-                     <li ng-repeat="trainingItem in Trainings"> <a ng-href="#/trainings/{{trainingItem.TName.toLowerCase()}}">{{trainingItem.TName}}</a></li>
-                </ul>
-            </li>
+           
 
             <li class="pure-menu-item"><a ng-click="navigateToPage('documents', pageType)" href="" class="pure-menu-link">Documents</a>
             </li>

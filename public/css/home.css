@@ -291,11 +291,11 @@ a.pure-button-primary {
     margin:0px;
     width:50%;
  }
- .discussion-list ul li{
+ 
+}
+.discussion-list ul li{
  border-bottom:1px solid grey;
 }
-}
-
 /*
  * -- DESKTOP (AND UP) MEDIA QUERIES --
  * On desktops and other large devices, we want to over-ride some
@@ -317,6 +317,10 @@ a.pure-button-primary {
         padding: 30px; 
         top: 75px;
         background: #585858; 
+    }
+    .add-discussion-section textarea{
+        display:block;
+        margin-bottom:15px;
     }
 .add-discussion-section p{
         color:#C0C0C0;

@@ -24,12 +24,7 @@ nbServer.ModelHash["practise"] = function (obj) {
 
     this.Lead = obj["Lead"];
 };
-nbServer.ModelHash["trainings"] = function (obj) {
-    this.Id = obj["Id"] || nbServer.guid();
-    this.TName = obj["TName"];
-
-    this.Lead = obj["Lead"];
-};
+ 
 
 nbServer.ModelHash["documents"] = function (obj, isNew) {
     this.Id = obj["Id"] || nbServer.guid();
@@ -45,7 +40,7 @@ nbServer.ModelHash["documents"] = function (obj, isNew) {
     }
 };
 
-nbServer.ModelHash["employee"] = function (obj) {
+nbServer.ModelHash["employee"] = function (obj, isNew) {
     this.Id = obj["Id"] || nbServer.guid();
     this.Username = obj["Username"];
     this.Password = obj["Password"];
@@ -56,6 +51,12 @@ nbServer.ModelHash["employee"] = function (obj) {
 
     //must have this field in DB
     this.UserType = obj["UserType"]; //ADMIN, USER
+
+    if(isNew){
+        this.JoinedDate = new Date().getTime();
+    }else{
+        this.JoinedDate = obj["JoinedDate"];
+    }
 };
 
 

@@ -4,12 +4,9 @@ angular.module('siteApp').config(['$routeProvider', function ($routeProvider) {
         .when('/home', {templateUrl: 'partials/HomePage.html', controller: 'HomePageController'})
         .when('/projects', {templateUrl: 'partials/Projects.html', controller: 'ProjectsController'})
         .when('/coe', {templateUrl: 'partials/COE.html', controller: 'COEController'})
-        .when('/trainings', {templateUrl: 'partials/Trainings.html', controller: 'TrainingsController'})
         .when('/discussions', {templateUrl: 'partials/Discussions.html', controller: 'DiscussionController'})
 
-        // .when('/register', {templateUrl: 'partials/Register.html', controller: 'RegisterController'})
-
-       
+        // .when('/register', {templateUrl: 'partials/Register.html', controller: 'RegisterController'})     
 
         .when('/projects/blogs', {
             templateUrl: 'partials/Blog.html', controller: 'BlogsController', resolve: {
@@ -27,7 +24,7 @@ angular.module('siteApp').config(['$routeProvider', function ($routeProvider) {
             }
         })
 
- .when('/projects/:projectname', {
+         .when('/projects/:projectname', {
             templateUrl: 'partials/ProjectDetails.html',
             controller: 'ProjectDetailController',
             resolve: {
@@ -52,24 +49,7 @@ angular.module('siteApp').config(['$routeProvider', function ($routeProvider) {
             }
         })
 
-
-        .when('/trainings/documents', {
-            templateUrl: 'partials/fileupload.html', controller: 'DocumentsController', resolve: {
-                pageType: function () {
-                    return 'TRAININGS';
-                }
-            }
-        })
-        .when('/trainings/blogs', {
-            templateUrl: 'partials/Blog.html', controller: 'BlogsController', resolve: {
-                pageType: function () {
-                    return 'TRAININGS';
-                }
-            }
-        })
-
-
-        .when('/coe/:practisename', {
+         .when('/coe/:practisename', {
             templateUrl: 'partials/PractiseDetails.html',
             controller: 'PractiseDetailController',
             resolve: {
@@ -78,17 +58,7 @@ angular.module('siteApp').config(['$routeProvider', function ($routeProvider) {
                 }
             }
         })
-
-        .when('/trainings/:trainingname', {
-            templateUrl: 'partials/TrainingDetails.html',
-            controller: 'TrainingDetailController',
-            resolve: {
-                pageType: function () {
-                    return 'TRAININGS';
-                }
-            }
-        })
-
+ 
         .when('/admin', {
             templateUrl: 'partials/admin.html',
             controller: 'adminCntl'

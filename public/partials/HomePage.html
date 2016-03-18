@@ -8,13 +8,9 @@
 					<a href=""><img src="images/news.jpg" alt=""></a>
 					<a href=""><img src="images/events.jpg" alt=""></a>
 					<a href=""><img src="images/birthdays.png" alt=""> </a>
-					<!-- <a href=""><img src="images/new-employees.jpg" alt=""> </a> -->
 				</figure>  
 				<p>Recent Activities</p>
-			</div>
-			<!-- <p>
-			<a href="" class="pure-button pure-button-primary"></a>
-			</p> -->
+			</div> 
 		</div>
 	</div>
 <!--News Section -->
@@ -91,8 +87,8 @@
 				<div class="l-box-lrg pure-u-1 pure-u-md-3-5">
 					<h4>New Employees</h4>
 					  <ul class="employee-list"> 
-					  		   <li ng-repeat="empDetails in Employee">  <b>FirstName:</b>{{empDetails.FName}} <span><b>LastName:</b> {{empDetails.LName}}</span>
-                          		 <b>Joining Date:</b> {{empDetails.JoinedDate}}EMPID: {{empDetails.EmpId}} </li>  
+					  		   <li ng-repeat="empDetails in Employee | orderBy:'-JoinedDate'">  <b>FirstName:</b>{{empDetails.FName}} <span><b>LastName:</b> {{empDetails.LName}}</span>
+                          		 <b>Joining Date:</b> {{empDetails.JoinedDate | date}}</li>  
                       </ul>
 				</div>
 			</div>
@@ -103,9 +99,9 @@
 	</div> 
 </div>
 
- <!--<script>-->
-        <!--yam.connect.embedFeed(-->
-          <!--{ container: '#embedded-feed',-->
-            <!--network: 'techaspect.com'  // network permalink (see below)-->
-        <!--});-->
-    <!--</script>-->
+  <script> 
+         yam.connect.embedFeed( 
+           { container: '#embedded-feed',
+             network: 'techaspect.com'  // network permalink (see below) 
+         }); 
+     </script>
