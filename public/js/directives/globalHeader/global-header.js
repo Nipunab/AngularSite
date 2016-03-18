@@ -63,6 +63,8 @@ angular.module('siteApp').directive('globalHeader', function ($rootScope, $locat
 
             $scope.logout = function () {
                 document.cookie = "lToken=TOKEN";
+                document.cookie = "uid=USERID";
+                document.cookie = "Username=USERNAME";
                 $scope.IsAuthenticated = false;
                 $rootScope.safeApply(function () {
                     $location.path('/login');

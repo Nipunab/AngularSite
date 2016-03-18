@@ -36,20 +36,23 @@ angular.module('siteApp').service('api', function ($rootScope) {
 
     this.login = function (userInfo) {
         var queryParamString = "";
-
+        var postData = {};
         if(userInfo){
             queryParamString = "?username=" + encodeURIComponent(userInfo.Username) + "&password=" + encodeURIComponent(userInfo.Password);
+            postData.Username = userInfo.Username;
+            postData.Password = userInfo.Password;
         }
-        return that.get('http://localhost:5654/login' + queryParamString)
+        return that.post('http://localhost:5654/login', postData)
             .then(function (resp) {
                 if (resp.Body.tokenObject) {
                     document.cookie = "lToken=" + resp.Body.tokenObject;
                     document.cookie = "uid=" + resp.Body.UserId;
+                    document.cookie = "Username=" + resp.Body.Username;
 
                     //invoking listener event on rootScope named 'login-changed' with 'IsAuthentiated' as true
                     //As token is valid for logged in user.
                     $rootScope.$emit('login-changed', { IsAuthenticated: true });
-                    $rootScope.Username = userInfo ? userInfo.Username : "guest";
+                    $rootScope.Username = userInfo ? userInfo.Username : getCookieVal("Username") ? getCookieVal("Username") : "Guest";
                     return {"Status": true};
                 } else {
                     $rootScope.$emit('login-changed', { IsAuthenticated: false });
