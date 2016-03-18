@@ -47,6 +47,7 @@ angular.module('siteApp').controller('adminCntl', function ($scope, Message, $ro
                 addPromise = api.addProject(itemToAdd);
                 break;
             case 'PRACTISE':
+                addPromise = api.addPractise(itemToAdd);
                 break;
             case 'EMPLOYEE':
                 addPromise = api.addEmployee(itemToAdd);
@@ -55,13 +56,16 @@ angular.module('siteApp').controller('adminCntl', function ($scope, Message, $ro
 
         if(addPromise){
             addPromise.then(function (addedItem) {
-                if(addedItem) {
+                if(addedItem ) {
                     $scope.safeApply(function () {
                         switch (typ) {
                             case 'PROJECT':
                                 $scope.Projects.push(addedItem);
                                 break;
                             case 'PRACTISE':
+                                if(addedItem.Id) {
+                                    $scope.Practises.push(addedItem);
+                                }
                                 break;
                             case 'EMPLOYEE':
                                 if(addedItem.Id) {
@@ -87,8 +91,10 @@ angular.module('siteApp').controller('adminCntl', function ($scope, Message, $ro
                     deletePromise = api.deleteProject(item);
                     break;
                 case 'PRACTISE':
+                    deletePromise = api.deletePractise(item);
                     break;
                 case 'EMPLOYEE':
+                    deletePromise = api.deleteEmployee(item);
                     break;
             }
         }
@@ -102,8 +108,14 @@ angular.module('siteApp').controller('adminCntl', function ($scope, Message, $ro
                         });
                         break;
                     case 'PRACTISE':
+                        $scope.safeApply(function () {
+                            _.remove($scope.Practises, {Id: item.Id});
+                        });
                         break;
                     case 'EMPLOYEE':
+                        $scope.safeApply(function () {
+                            _.remove($scope.Employees, {Id: item.Id});
+                        });
                         break;
                 }
             });

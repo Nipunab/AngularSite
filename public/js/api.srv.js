@@ -101,20 +101,38 @@ angular.module('siteApp').service('api', function ($rootScope) {
         });
     };
 
-    this.addEmployee = function (employee) {
-        return that.post('http://localhost:5654/table/employee', employee).then(function (resp) {
-            return resp.Body;
-        });
-    };
-
-    this.deleteProject = function (itemToDelete) {
-        return that.delete('http://localhost:5654/table/projects?Id=' + itemToDelete.Id);
-    };
 
     this.addProject = function (itemToAdd) {
         return that.post('http://localhost:5654/table/projects', itemToAdd).then(function (resp) {
             return resp.Body;
         });
     };
+
+    this.addEmployee = function (itemToAdd) {
+        return that.post('http://localhost:5654/table/employee', itemToAdd).then(function (resp) {
+            return resp.Body;
+        });
+    };
+
+    this.addPractise = function (itemToAdd) {
+        return that.post('http://localhost:5654/table/practise', itemToAdd).then(function (resp) {
+            return resp.Body;
+        });
+    };
+
+
+    this.deleteEmployee = function (itemToDelete) {
+        return that.delete('http://localhost:5654/table/employee?Id=' + itemToDelete.Id);
+    };
+
+    this.deleteProject = function (itemToDelete) {
+        return that.delete('http://localhost:5654/table/projects?Id=' + itemToDelete.Id);
+    };
+
+    this.deletePractise = function (itemToDelete) {
+        return that.delete('http://localhost:5654/table/practise?Id=' + itemToDelete.Id);
+    };
+
+
 
 });

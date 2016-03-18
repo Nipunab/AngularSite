@@ -19,6 +19,11 @@
         <h4>Projects</h4>
         <div ng-if="IsPractiseLoading"> Loading....</div>
         <div ng-if="IsPractiseLoading == false">
+            <div>
+                <input type="text" placeholder="Practise Name" ng-model="NewPractise.PName"/>
+                <input type="text" placeholder="Practise Lead" ng-model="NewPractise.Lead"/>
+                <input type="button" value=" Add Practise " ng-click="addItem('PRACTISE', NewPractise)" />
+            </div>
             <ul >
                 <li ng-repeat="practise in Practises">
                     {{ practise.PName}}
