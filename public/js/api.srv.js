@@ -83,6 +83,17 @@ angular.module('siteApp').service('api', function ($rootScope) {
         });
     };
 
+      this.getDiscussion = function () {
+        return that.get('http://localhost:5654/table/discussions').then(function (resp) {
+            if(resp.Body && resp.Body.list){
+                return resp.Body.list;
+            } else{
+                return [];
+            }
+        });
+    };
+
+
     this.getEmployee = function (username, userId) {
         return that.get('http://localhost:5654/table/employee').then(function (resp) {
             if(resp.Body && resp.Body.list){
@@ -123,6 +134,11 @@ angular.module('siteApp').service('api', function ($rootScope) {
         });
     };
 
+  this.addDiscussion = function (itemToAdd) {
+        return that.post('http://localhost:5654/table/discussions', itemToAdd).then(function (resp) {
+            return resp.Body;
+        });
+    };
 
     this.deleteEmployee = function (itemToDelete) {
         return that.delete('http://localhost:5654/table/employee?Id=' + itemToDelete.Id);
@@ -135,7 +151,4 @@ angular.module('siteApp').service('api', function ($rootScope) {
     this.deletePractise = function (itemToDelete) {
         return that.delete('http://localhost:5654/table/practise?Id=' + itemToDelete.Id);
     };
-
-
-
 });

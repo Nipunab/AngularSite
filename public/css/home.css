@@ -279,7 +279,7 @@ a.pure-button-primary {
         bottom: 0;
         padding: 30px;
         position: fixed;
-        top: 75px;
+        top: 70px;
         background: #585858; 
     }
 .discussion-list{    
@@ -290,6 +290,7 @@ a.pure-button-primary {
     position: absolute;
     margin:0px;
     width:50%;
+    list-style: none;
  }
  
 }
@@ -306,6 +307,9 @@ a.pure-button-primary {
     .splash-head {
         font-size: 300%;
     }
+     .discussion-container h2{
+    margin-left:30%;
+ }
 }
 
 
@@ -315,7 +319,7 @@ a.pure-button-primary {
  .add-discussion-section{
         bottom: 0;
         padding: 30px; 
-        top: 75px;
+        top: 70px;
         background: #585858; 
     }
     .add-discussion-section textarea{
@@ -336,9 +340,28 @@ a.pure-button-primary {
  .header-list{
     float:right;
  }
+ .comment-section input{
+    margin-bottom:15px;
+ }
  @media (max-width: 48em) {
    .document-container{
     left: 0;
     margin-top: 0; 
+ }
+ .header-list .logout{
+    display:inline;float:left;
+ }
+ .admin-container{
+    margin-top: :25%;
+ }
+ .discussion-container{
+    margin-top:75px;
+ }
+ .discussion-container h2{
+    margin-left:0px;
+ }
+ .discussion-list ul{
+    padding:10px;
+    list-style: none;
  }
  }

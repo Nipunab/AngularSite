@@ -220,7 +220,7 @@ Hides the menu at `48em`, but modify this based on your app's needs.
     }
     #menu {
         left: 200px;
-        margin-top:76px;
+        margin-top:70px;
     }
 
     .menu-link {

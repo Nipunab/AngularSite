@@ -25,7 +25,12 @@ nbServer.ModelHash["practise"] = function (obj) {
     this.Lead = obj["Lead"];
 };
  
-
+nbServer.ModelHash["discussions"] = function (obj) {
+    this.Id = obj["Id"] || nbServer.guid();
+    this.Comments = obj["Comments"];
+    this.ParentId = obj["ParentId"];
+};
+ 
 nbServer.ModelHash["documents"] = function (obj, isNew) {
     this.Id = obj["Id"] || nbServer.guid();
 

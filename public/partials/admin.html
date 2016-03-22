@@ -1,4 +1,4 @@
-<div>
+<div class="pure-u-1 admin-container">
     <h3>Admin Page</h3>
     <div>
         <h4>Projects</h4>
@@ -16,12 +16,12 @@
         </div>
     </div>
     <div>
-        <h4>Projects</h4>
+        <h4>Practises</h4>
         <div ng-if="IsPractiseLoading"> Loading....</div>
         <div ng-if="IsPractiseLoading == false">
             <div>
                 <input type="text" placeholder="Practise Name" ng-model="NewPractise.PName"/>
-                <input type="text" placeholder="Practise Lead" ng-model="NewPractise.Lead"/>
+               <!--  <input type="text" placeholder="Practise Lead" ng-model="NewPractise.Lead"/> -->
                 <input type="button" value=" Add Practise " ng-click="addItem('PRACTISE', NewPractise)" />
             </div>
             <ul >
@@ -33,7 +33,7 @@
         </div>
     </div>
     <div>
-        <h4>Employee</h4>
+        <h4>Employee Registration</h4>
         <div ng-if="IsEmployeeLoading"> Loading....</div>
         <div ng-if="IsEmployeeLoading == false">
             <div>
@@ -53,7 +53,7 @@
             </div>
             <ul>
                 <li ng-repeat="employee in Employees">
-                    {{ employee.Username}} {{ employee.UserType}}
+                   <b>USERNAME:</b> {{ employee.Username}} <b>USERTYPE:</b>{{ employee.UserType}}
                     <a href="" ng-click="deleteItem('EMPLOYEE', employee)">Delete</a>
                 </li>
             </ul>

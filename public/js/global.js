@@ -1,3 +1,5 @@
+
+
 var makeRequest = function (url, method, data, $http) {
     var reqPromise = null;
     if($http) {
@@ -130,38 +132,28 @@ var deleteEmployee = function (data) {
         console.log('ERR');
     });
 };
-//e.g:-  addEmployee({ "FName": "Nipuna"});
-//checkout db/lib/models.js for Properties mentioned for Employee table
-var getTrainings = function ($http, $scope) {
-    $http({method: "GET", url: "http://localhost:5654/table/trainings"}).then(function (trainingResponse) {
-        $scope.Trainings = trainingResponse.data.Body.list;
+ 
+
+
+var getDiscussion = function ($http, $scope) {
+    $http({
+        method: "GET", 
+        url: "http://localhost:5654/table/discussion"}).then(function (discussionResponse) {
+        $scope.Discussion = discussionResponse.data.Body.list;
     }, function () {
         console.log("Server not responding!!");
     });
 };
-
-var addTrainings = function (data) {
+//e.g:-  addEmployee({ "FName": "Nipuna"});
+//checkout db/lib/models.js for Properties mentioned for Employee table
+var addDiscussion = function (data) {
     angular.element('body').injector().get('$http')({
         method: "POST",
-        url: "http://localhost:5654/table/trainings",
-        data: {"TName": data["TName"]}
+        url: "http://localhost:5654/table/discussion",
+        data: {"Comments": data["Comments"]}
     }).then(function (dt) {
         console.log(dt);
     }).catch(function () {
         console.log('ERR');
     });
 };
-//e.g:- deleteProject({ "Id": "d32erewrwerewrerwer"})
-var deleteTrainings = function (data) {
-    angular.element('body').injector().get('$http')({
-        method: "DELETE",
-        url: "http://localhost:5654/table/trainings?Id=" + data["Id"]
-    }).then(function (dt) {
-        console.log(dt);
-    }).catch(function () {
-        console.log('ERR');
-    });
-};
-
-
-

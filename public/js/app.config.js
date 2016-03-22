@@ -6,8 +6,6 @@ angular.module('siteApp').config(['$routeProvider', function ($routeProvider) {
         .when('/coe', {templateUrl: 'partials/COE.html', controller: 'COEController'})
         .when('/discussions', {templateUrl: 'partials/Discussions.html', controller: 'DiscussionController'})
 
-        // .when('/register', {templateUrl: 'partials/Register.html', controller: 'RegisterController'})     
-
         .when('/projects/blogs', {
             templateUrl: 'partials/Blog.html', controller: 'BlogsController', resolve: {
                 pageType: function () {
