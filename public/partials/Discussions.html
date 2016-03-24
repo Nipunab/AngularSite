@@ -38,7 +38,13 @@
                      <h3>Comments</h3>
                          <ul ng-repeat="comments in list">
                              <li>{{comments.name}}</li>
+                              <div> <span ng-repeat="rating in ratings">{{rating.current}} out of
+                                    {{rating.max}}
+                                <div star-rating rating-value="rating.current" max="rating.max" on-rating-selected="getSelectedRating(rating)"></div>
+                                </span>
+                            </div>
                           </ul>
+
                  </div>          
             </div>   
       </div>
