@@ -20,11 +20,7 @@ angular.module('siteApp').controller('DiscussionController', function ($scope, M
         Message.create(message);
     };
 
-
-    //code for rating
-
-
-    //code for rating
+ 
 //code for modal popup
    $scope.add = function () {
     // var comobj={
