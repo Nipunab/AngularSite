@@ -1,54 +1,59 @@
-angular.module('siteApp').controller('DiscussionController', function ($scope, Message, $rootScope,api) {
+angular.module('siteApp').controller('DiscussionController', function ($scope, Message, $rootScope, api) {
 
     $scope.messages = Message.all;
-      $scope.rating = 0;
-            $scope.ratings = [{
-                current: 3,
-                max: 10
-            }, 
-            // {
-            //     current: 3,
-            //     max: 5
-            // }
-            ];
+    $scope.rating = 0;
+    $scope.ratings = [{
+        current: 3,
+        max: 10
+    }];
 
-            $scope.getSelectedRating = function (rating) {
-                console.log(rating);
-            }
+    $scope.maxRating = 10;
+
+    $scope.modelProps = {list: [], msgId: 0};
+
+    $scope.getSelectedRating = function (rating) {
+        console.log('rating and model prop : ', rating);
+        var itemToEdit = Message.get($scope.modelProps.msgId);
+        if(itemToEdit){
+            itemToEdit.rating = rating;
+            itemToEdit.$save();
+        }
+
+    };
     $scope.inserting = function (message) {
         message.user = $rootScope.Username;
+        message.rating = 3;
         Message.create(message);
     };
 
- 
-//code for modal popup
-   $scope.add = function () {
-    // var comobj={
-    //    Comments:dcomment,
-    //     ParentId:$routeParams.qnId
+    $scope.openComments = function (msg) {
+        $scope.modelProps.list = [];
+        $scope.messages.forEach(function (cItem) {
+            if (cItem.parentId && cItem.parentId == msg.$id) {
+                cItem.rating = cItem.rating ? cItem.rating : 3;
+                $scope.modelProps.list.push(cItem);
+            }
+        });
+        $scope.modelProps.msgId = msg.$id;
+        $('#myModal').modal('show');
+    };
 
-    //   };
-    //   api.addDiscussion(comobj).then(function(){
-    //      $scope.answer='';
-    //      api.getDiscussion().then(function(resp){
-    //          console.log(resp);
-    //          $scope.list.push({ answer: $scope.answer});
-    //          var ans=resp.data.Body.list;
-    //          $scope.list=_.filter(ans,function(res){
-    //               return res.ParentId==$routeParams.qnId;
-    //          });
-    //      });
-    //  });
-                  if (angular.isDefined($scope.name) && $scope.name != '') 
-                  {
-                        // ADD A NEW ELEMENT.
-                    $scope.list.push({ name: $scope.name});
 
-                       // CLEAR THE FIELDS.
-                      $scope.name = ''; 
-                  }
-    }
-//code for modal popup
+    $scope.add = function (commentToAdd) {
+        if (angular.isDefined(commentToAdd.text) && commentToAdd.text != '') {
+            // ADD A NEW ELEMENT.
+            $scope.modelProps.list.push({text: commentToAdd.text});
+
+            commentToAdd.user = $rootScope.Username;
+            commentToAdd.rating = 3; //for now rating is defaulted to 3
+            commentToAdd.parentId = $scope.modelProps.msgId;
+            Message.create(commentToAdd);
+
+            commentToAdd.text = '';
+        }
+    };
+
+
 });
 angular.module('siteApp').factory('Message', ['$firebase',
     function ($firebase) {
@@ -73,14 +78,14 @@ angular.module('siteApp').factory('Message', ['$firebase',
     }
 ]);
 
-angular.module('siteApp').directive('starRating', function () { 
+angular.module('siteApp').directive('starRating', function () {
     return {
         restrict: 'A',
         template: '<ul class="rating">' +
-            '<li ng-repeat="star in stars" ng-class="star" ng-click="toggle($index)">' +
-            '\u2605' +
-            '</li>' +
-            '</ul>',
+        '<li ng-repeat="star in stars" ng-class="star" ng-click="toggle($index)">' +
+        '\u2605' +
+        '</li>' +
+        '</ul>',
         scope: {
             ratingValue: '=',
             max: '=',

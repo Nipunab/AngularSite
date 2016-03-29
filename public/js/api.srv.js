@@ -5,8 +5,8 @@ angular.module('siteApp').service('api', function ($rootScope) {
     var makeRequest = function (url, method, content, options) {
         var lToken = getCookieVal("lToken");
         var queryParamString = '';
-        if(lToken && lToken != 'TOKEN'){
-            queryParamString = (url.indexOf('?') >= 0 ? '&' : '?') +  "lToken=" + lToken;
+        if (lToken && lToken != 'TOKEN') {
+            queryParamString = (url.indexOf('?') >= 0 ? '&' : '?') + "lToken=" + lToken;
         }
 
         return new Promise(function (resolve, reject) {
@@ -37,7 +37,7 @@ angular.module('siteApp').service('api', function ($rootScope) {
     this.login = function (userInfo) {
         var queryParamString = "";
         var postData = {};
-        if(userInfo){
+        if (userInfo) {
             queryParamString = "?username=" + encodeURIComponent(userInfo.Username) + "&password=" + encodeURIComponent(userInfo.Password);
             postData.Username = userInfo.Username;
             postData.Password = userInfo.Password;
@@ -51,11 +51,11 @@ angular.module('siteApp').service('api', function ($rootScope) {
 
                     //invoking listener event on rootScope named 'login-changed' with 'IsAuthentiated' as true
                     //As token is valid for logged in user.
-                    $rootScope.$emit('login-changed', { IsAuthenticated: true });
+                    $rootScope.$emit('login-changed', {IsAuthenticated: true});
                     $rootScope.Username = userInfo ? userInfo.Username : getCookieVal("Username") ? getCookieVal("Username") : "Guest";
                     return {"Status": true};
                 } else {
-                    $rootScope.$emit('login-changed', { IsAuthenticated: false });
+                    $rootScope.$emit('login-changed', {IsAuthenticated: false});
                     $rootScope.Username = null;
                     return {"Status": false};
                 }
@@ -65,29 +65,39 @@ angular.module('siteApp').service('api', function ($rootScope) {
 
     this.getProjects = function () {
         return that.get('http://localhost:5654/table/projects').then(function (resp) {
-           if(resp.Body && resp.Body.list){
+            if (resp.Body && resp.Body.list) {
                 return resp.Body.list;
-           } else{
-                return [];
-           }
-        });
-    };
-
-    this.getPractise = function () {
-        return that.get('http://localhost:5654/table/practise').then(function (resp) {
-            if(resp.Body && resp.Body.list){
-                return resp.Body.list;
-            } else{
+            } else {
                 return [];
             }
         });
     };
 
-      this.getDiscussion = function () {
-        return that.get('http://localhost:5654/table/discussions').then(function (resp) {
-            if(resp.Body && resp.Body.list){
+    this.getPractise = function () {
+        return that.get('http://localhost:5654/table/practise').then(function (resp) {
+            if (resp.Body && resp.Body.list) {
                 return resp.Body.list;
-            } else{
+            } else {
+                return [];
+            }
+        });
+    };
+
+    this.getDiscussion = function () {
+        return that.get('http://localhost:5654/table/discussions').then(function (resp) {
+            if (resp.Body && resp.Body.list) {
+                return resp.Body.list;
+            } else {
+                return [];
+            }
+        });
+    };
+
+    this.getDocuments = function () {
+        return that.get('http://localhost:5654/table/documents').then(function (resp) {
+            if (resp.Body && resp.Body.list) {
+                return resp.Body.list;
+            } else {
                 return [];
             }
         });
@@ -96,24 +106,26 @@ angular.module('siteApp').service('api', function ($rootScope) {
 
     this.getEmployee = function (username, userId) {
         return that.get('http://localhost:5654/table/employee').then(function (resp) {
-            if(resp.Body && resp.Body.list){
+            if (resp.Body && resp.Body.list) {
                 var usersList = resp.Body.list;
-                if(username){
+                if (username) {
                     usersList = resp.Body.list.filter(function (userItem) {
                         return userItem.Username == username;
                     });
                 }
-                if(userId){
+                if (userId) {
                     usersList = resp.Body.list.filter(function (userItem) {
                         return userItem.Id == userId;
                     });
                 }
                 return usersList;
-            } else{
+            } else {
                 return [];
             }
         });
     };
+
+
 
 
     this.addProject = function (itemToAdd) {
@@ -134,11 +146,20 @@ angular.module('siteApp').service('api', function ($rootScope) {
         });
     };
 
-  this.addDiscussion = function (itemToAdd) {
+    this.addDiscussion = function (itemToAdd) {
         return that.post('http://localhost:5654/table/discussions', itemToAdd).then(function (resp) {
             return resp.Body;
         });
     };
+
+    this.addDocument = function (itemToAdd) {
+        return that.post('http://localhost:5654/table/documents', itemToAdd).then(function (resp) {
+            return resp.Body;
+        });
+    };
+
+
+
 
     this.deleteEmployee = function (itemToDelete) {
         return that.delete('http://localhost:5654/table/employee?Id=' + itemToDelete.Id);
@@ -151,4 +172,11 @@ angular.module('siteApp').service('api', function ($rootScope) {
     this.deletePractise = function (itemToDelete) {
         return that.delete('http://localhost:5654/table/practise?Id=' + itemToDelete.Id);
     };
+
+    this.deleteDocument = function (itemToDelete) {
+        return that.delete('http://localhost:5654/table/documents?Id=' + itemToDelete.Id);
+    };
+
+
+
 });

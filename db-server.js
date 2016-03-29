@@ -34,7 +34,7 @@ nbServer.ModelHash["discussions"] = function (obj) {
 nbServer.ModelHash["documents"] = function (obj, isNew) {
     this.Id = obj["Id"] || nbServer.guid();
 
-    this.Name = obj["DocumentName"];
+    this.Name = obj["Name"];
     this.StorageToken = obj["StorageToken"];
     this.Category = obj["Category"]; // Projects, COE
 

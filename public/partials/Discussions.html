@@ -1,52 +1,54 @@
 <div id="layout" class="discussion-container pure-u-1">
-    <h2 >Discussions Page</h2>
-       <div>
-            <div class="add-discussion-section pure-u-1 pure-u-md-1-4">
-                <textarea ng-model="NewMessage.text" />
-                    <input value=" Submit " type="button" ng-click="inserting(NewMessage)"/>
-            </div>
-            <div class="discussion-list pure-u-1 pure-u-md-1">
-                <ul>
-                    <li ng-repeat="message in messages" class="discussion-item">
-                        <div class="discussion-body">
-                            <a href="" data-toggle="modal" data-target="#myModal">{{message.text}}</a>
-                        </div>
-                        <div style="text-align: right;">
-                            <span>--- {{message.user}}</span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+    <h2>Discussions Page</h2>
+    <div>
+        <div class="add-discussion-section pure-u-1 pure-u-md-1-4">
+            <textarea ng-model="NewMessage.text"/>
+            <input value=" Submit " type="button" ng-click="inserting(NewMessage)"/>
         </div>
+        <div class="discussion-list pure-u-1 pure-u-md-1">
+            <ul>
+                <li ng-repeat="message in messages" class="discussion-item" ng-if="!message.parentId">
+                    <div class="discussion-body">
+                        <a href="" ng-click="openComments(message)">{{message.text}}</a>
+                    </div>
+                    <div style="text-align: right;">
+                        <span>--- {{message.user}}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
- 
- <div class="modal fade" id="myModal" role="dialog" ng-init="list=[ ]">
+
+<div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
-      <!-- Modal content-->
+        <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Comments</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Comments</h4>
             </div>
             <div class="modal-body">
-              <p>Enter the Comments</p>              
-               <div class="comment-section">
-                    <textarea name="comments" type="text" ng-model="name" placeholder="Enter the comment" />  
-                    <button ng-click="add()">Add the comment</button> 
+                <p>Enter the Comments</p>
+                <div class="comment-section">
+                    <textarea name="comments" type="text" ng-model="newComment.text" placeholder="Enter the comment"/>
+                    <button ng-click="add(newComment)">Add the comment</button>
                 </div>
-                 <div>
-                     <h3>Comments</h3>
-                         <ul ng-repeat="comments in list">
-                             <li>{{comments.name}}</li>
-                              <div> <span ng-repeat="rating in ratings">{{rating.current}} out of
-                                    {{rating.max}}
-                                <div star-rating rating-value="rating.current" max="rating.max" on-rating-selected="getSelectedRating(rating)"></div>
+                <div>
+                    <h3>Comments</h3>
+                    <ul ng-repeat="comment in modelProps.list">
+                        <li>{{comment.text}}</li>
+                        <div> <span >{{comment.rating ? comment.rating: '0' }} out of
+                                    {{maxRating}}
+                                <div star-rating rating-value="comment.rating" max="maxRating"
+                                     on-rating-selected="getSelectedRating(comment)"></div>
                                 </span>
-                            </div>
-                          </ul>
+                        </div>
+                    </ul>
 
-                 </div>          
-            </div>   
-      </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 </div>

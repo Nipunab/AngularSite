@@ -1,7 +1,15 @@
 <div class="document-container">
- <div class="sidebar">
-       <side-nav page-type="{{pageType}}"></side-nav>
-  </div>
+    <div class="sidebar">
+        <side-nav page-type="{{pageType}}"></side-nav>
+    </div>
     <input type="file" file-model="myFile" file-on-change="uploadFiles" style="margin-top:150px;"/>
-   <!--  <button ng-click="saveFiles()">upload me</button> -->
+    <!--  <button ng-click="saveFiles()">upload me</button> -->
+    <div>
+        <ul>
+            <li ng-repeat="doc in Documents" ng-if="doc.Category == pageType">
+                {{ doc.Name }}
+                <a href="" ng-click="deleteDocument(doc)">Delete</a>
+            </li>
+        </ul>
+    </div>
 </div>

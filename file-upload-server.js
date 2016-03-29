@@ -131,9 +131,10 @@ var resumableHandler = function (req, res, headers) {
 
 var downloadHandler = function (req, res, headers) {
     var qParams = $U.parseQueryParams(req);
-    if(qParams.fileName){
+    if(qParams.fileName && qParams.storageToken){
+        var storageToken = qParams.storageToken;
         var fileName = qParams.fileName;
-        var filePath = path.join(__dirname, 'files', fileName);
+        var filePath = path.join(__dirname, 'files', storageToken);
         $U.isFileExists(filePath).then(function (isExists) {
             console.log('is file exists ', isExists);
             if(isExists){

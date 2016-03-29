@@ -74,7 +74,7 @@ angular.module('ng-chunk-upload', []).service('fchnkUpload', function ($http) {
         this.fToken = file.fToken;
     };
 
-    var ChunkClass = function (s, cs, cd, fn, ci, ft, cb, tcc) {
+    var ChunkClass = function (s, cs, cd, fn, ci, ft, cb, tcc, fs) {
         this.StartPosition = s;
         this.ChunkSize = cs;
 
@@ -89,6 +89,8 @@ angular.module('ng-chunk-upload', []).service('fchnkUpload', function ($http) {
         this.chunkCallback = cb;
         this.chunkCount = tcc;
 
+        this.FileSize = fs;
+
     };
 
     var processNextChunk = function () {
@@ -96,13 +98,13 @@ angular.module('ng-chunk-upload', []).service('fchnkUpload', function ($http) {
             return g.Status == STATUS_CODES.READY;
         });
         if(nextChunkToProcess.length > 0){
-            console.log("Progressing upload chunks ", progressRequestCount);
+            //console.log("Progressing upload chunks ", progressRequestCount);
             if(progressRequestCount < maxRequestCount) {
                 progressRequestCount += 1;
                 nextChunkToProcess = nextChunkToProcess[0];
                 nextChunkToProcess.Status = STATUS_CODES.UPLOADING;
                 nextChunkToProcess.chunkCallback(null, nextChunkToProcess);
-                makeRequest(nextChunkToProcess.ChunkData, nextChunkToProcess.fileName, nextChunkToProcess.ChunkIndex, nextChunkToProcess.chunkCount).then(function (err, resp) {
+                makeRequest(nextChunkToProcess.ChunkData, nextChunkToProcess.fToken, nextChunkToProcess.ChunkIndex, nextChunkToProcess.chunkCount).then(function (err, resp) {
                     if (err) {
                         nextChunkToProcess.Status = STATUS_CODES.FAILED;
                     } else {
@@ -113,7 +115,7 @@ angular.module('ng-chunk-upload', []).service('fchnkUpload', function ($http) {
                     processNextChunk();
                 });
             }else{
-                console.log("Waiting for to upload que ");
+                //console.log("Waiting for to upload que ");
             }
 
         }else{
@@ -124,10 +126,10 @@ angular.module('ng-chunk-upload', []).service('fchnkUpload', function ($http) {
     var addChunk = function (e) {
         var contents = e.target.result;
         if (e.target.readyState == FileReader.DONE) {
-            console.log('total chunk count is : ',this.chunkCount);
             var chunkItem = new ChunkClass(this.startPosition, this.bytesToRead, contents, this.fileName, this.index, this.fToken);
             chunkItem.chunkCallback = this.chunkCallback;
             chunkItem.chunkCount = this.chunkCount;
+            chunkItem.FileSize = this.totalSize;
             ChunkList.push(chunkItem);
             var sumBy = 0;
             _.filter(ChunkList, { "fToken": this.fToken}).forEach(function(g){ sumBy += g.ChunkSize;  });
