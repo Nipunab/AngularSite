@@ -1,56 +1,77 @@
 angular.module('siteApp').controller('DiscussionController', function ($scope, Message, $rootScope, api) {
 
-    $scope.messages = Message.all;
-    $scope.rating = 0;
-    $scope.ratings = [{
-        current: 3,
-        max: 10
-    }];
+    $scope.safeApply = function (fn) {
+        var phase = this.$root.$$phase;
+        if (phase == '$apply' || phase == '$digest') {
+            if (fn && (typeof(fn) === 'function')) {
+                fn();
+            }
+        } else {
+            this.$apply(fn);
+        }
+    };
+
+
+    $scope.NewMessage = {};
+    $scope.NewMessage.Rating = 3;
+
+    $scope.newComment = {};
+    $scope.newComment.Rating = 3;
 
     $scope.maxRating = 10;
 
-    $scope.modelProps = {list: [], msgId: 0};
+    $scope.Messages = [];
+    $scope.Comments = [];
 
-    $scope.getSelectedRating = function (rating) {
-        console.log('rating and model prop : ', rating);
-        var itemToEdit = Message.get($scope.modelProps.msgId);
-        if(itemToEdit){
-            itemToEdit.rating = rating;
-            itemToEdit.$save();
-        }
-
-    };
-    $scope.inserting = function (message) {
-        message.user = $rootScope.Username;
-        message.rating = 3;
-        Message.create(message);
-    };
-
-    $scope.openComments = function (msg) {
-        $scope.modelProps.list = [];
-        $scope.messages.forEach(function (cItem) {
-            if (cItem.parentId && cItem.parentId == msg.$id) {
-                cItem.rating = cItem.rating ? cItem.rating : 3;
-                $scope.modelProps.list.push(cItem);
-            }
+    var loadDiscussions = function () {
+        api.getDiscussion().then(function (discussions) {
+            $scope.safeApply(function () {
+                $scope.Messages = discussions;
+            });
         });
-        $scope.modelProps.msgId = msg.$id;
+    };
+
+    loadDiscussions();
+
+    $scope.changeRating = function (comment) {
+
+    };
+
+    $scope.addDiscussion = function (newDiscussion) {
+        newDiscussion.AddedBy = $rootScope.CurrentUser.Username;
+        newDiscussion.ParentId = 0;
+        api.addDiscussion(newDiscussion).then(function (resp) {
+            loadDiscussions();
+        });
+    };
+
+    var loadComments = function (Id) {
+        var comments = [];
+        api.getDiscussion().then(function (discussions) {
+            discussions.forEach(function (fItem) {
+                if(fItem.ParentId == Id){
+                    comments.push(fItem);
+                }
+            });
+            $scope.safeApply(function () {
+                $scope.Comments = comments;
+            });
+        });
+
+    };
+
+
+    $scope.openComments = function (disc) {
+        $scope.newComment.ParentId = disc.Id;
+        loadComments(disc.Id);
         $('#myModal').modal('show');
     };
 
-
-    $scope.add = function (commentToAdd) {
-        if (angular.isDefined(commentToAdd.text) && commentToAdd.text != '') {
-            // ADD A NEW ELEMENT.
-            $scope.modelProps.list.push({text: commentToAdd.text});
-
-            commentToAdd.user = $rootScope.Username;
-            commentToAdd.rating = 3; //for now rating is defaulted to 3
-            commentToAdd.parentId = $scope.modelProps.msgId;
-            Message.create(commentToAdd);
-
-            commentToAdd.text = '';
-        }
+    $scope.addComment = function (newComment) {
+        newComment.AddedBy = $rootScope.CurrentUser.Username;
+        api.addDiscussion(newComment).then(function (resp) {
+            loadComments($scope.newComment.ParentId);
+        });
     };
 
 

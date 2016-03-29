@@ -177,6 +177,4 @@ angular.module('siteApp').service('api', function ($rootScope) {
         return that.delete('http://localhost:5654/table/documents?Id=' + itemToDelete.Id);
     };
 
-
-
 });
